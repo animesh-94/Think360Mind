@@ -8,6 +8,8 @@ export interface FallingLeavesProps {
   className?: string;
   leafCount?: number;
   interactive?: boolean;
+  fullScreen?: boolean;
+  shapes?: string[];
 }
 
 interface LeafParticle {
@@ -22,86 +24,138 @@ interface LeafParticle {
   oscSpeed: number;
   flip: number;
   flipSpeed: number;
-  color: string;
+  primaryColor: string;
+  secondaryColor: string;
   stemColor: string;
+  veinColor: string;
+  opacity: number;
 }
 
-// Crisp monochrome maple leaf paths and palettes
-const MAPLE_PALETTE = [
-  { fill: 'rgba(255, 255, 255, 0.42)', stroke: 'rgba(255, 255, 255, 0.75)' },
-  { fill: 'rgba(228, 228, 231, 0.32)', stroke: 'rgba(255, 255, 255, 0.55)' },
-  { fill: 'rgba(161, 161, 170, 0.28)', stroke: 'rgba(212, 212, 216, 0.50)' },
-  { fill: 'rgba(255, 255, 255, 0.20)', stroke: 'rgba(255, 255, 255, 0.45)' },
+// True autumn maple leaf palettes: fiery crimson red, burnt amber-orange, golden saffron, deep scarlet wine
+const AUTUMN_MAPLE_PALETTES = [
+  {
+    primary: '#DC2626', // Vibrant crimson red
+    secondary: '#EA580C', // Burnt orange highlight
+    stem: '#7F1D1D',
+    vein: 'rgba(127, 29, 29, 0.75)',
+  },
+  {
+    primary: '#EA580C', // Autumn fiery orange
+    secondary: '#F59E0B', // Golden amber tip
+    stem: '#9A3412',
+    vein: 'rgba(154, 52, 18, 0.75)',
+  },
+  {
+    primary: '#B91C1C', // Deep maple scarlet
+    secondary: '#C2410C', // Russet red
+    stem: '#781515',
+    vein: 'rgba(120, 21, 21, 0.8)',
+  },
+  {
+    primary: '#F59E0B', // Rich golden yellow
+    secondary: '#D97706', // Warm honey amber
+    stem: '#B45309',
+    vein: 'rgba(180, 83, 9, 0.75)',
+  },
+  {
+    primary: '#991B1B', // Deep burgundy / maroon
+    secondary: '#DC2626', // Bright red accent
+    stem: '#5F1212',
+    vein: 'rgba(95, 18, 18, 0.85)',
+  },
+  {
+    primary: '#D97706', // Warm amber ochre
+    secondary: '#EF4444', // Red-tinged margin
+    stem: '#92400E',
+    vein: 'rgba(146, 64, 14, 0.75)',
+  },
 ];
 
 function drawMapleLeaf(
   ctx: CanvasRenderingContext2D,
   size: number,
-  fillColor: string,
-  strokeColor: string
+  primaryColor: string,
+  secondaryColor: string,
+  stemColor: string,
+  veinColor: string,
+  opacity: number
 ) {
   ctx.save();
-  ctx.beginPath();
-  // Realistic 5-lobe serrated maple leaf path normalized to [-size/2, -size/2, size, size]
+  ctx.globalAlpha = opacity;
+
+  // Normalized scaling factor for maple leaf
   const s = size / 32;
 
-  ctx.moveTo(0, 14 * s); // stem base
+  // Create subtle radial/linear autumn gradient across the leaf blade
+  const grad = ctx.createLinearGradient(0, 14 * s, 0, -18 * s);
+  grad.addColorStop(0, stemColor);
+  grad.addColorStop(0.35, primaryColor);
+  grad.addColorStop(1, secondaryColor);
+
+  ctx.beginPath();
+  // 5-lobe serrated maple leaf contour (Acer palmatum / saccharum geometry)
+  ctx.moveTo(0, 15 * s); // stem base
   ctx.lineTo(0, 6 * s);
 
-  // Bottom left lobe
+  // Lower Left Lobe
   ctx.lineTo(-6 * s, 8 * s);
-  ctx.lineTo(-9 * s, 6 * s);
+  ctx.lineTo(-10 * s, 6 * s);
   ctx.lineTo(-7 * s, 2 * s);
-  ctx.lineTo(-12 * s, 2 * s);
-  ctx.lineTo(-14 * s, -2 * s);
-  ctx.lineTo(-8 * s, -4 * s);
+  ctx.lineTo(-13 * s, 1.5 * s);
+  ctx.lineTo(-15 * s, -2.5 * s);
+  ctx.lineTo(-9 * s, -4.5 * s);
 
-  // Left middle lobe
-  ctx.lineTo(-11 * s, -9 * s);
-  ctx.lineTo(-8 * s, -11 * s);
-  ctx.lineTo(-4 * s, -8 * s);
+  // Upper Left Middle Lobe
+  ctx.lineTo(-12 * s, -10 * s);
+  ctx.lineTo(-8.5 * s, -12 * s);
+  ctx.lineTo(-4.5 * s, -8.5 * s);
 
-  // Central apex lobe
-  ctx.lineTo(-4 * s, -13 * s);
-  ctx.lineTo(0, -17 * s);
-  ctx.lineTo(4 * s, -13 * s);
+  // Central Apex Lobe
+  ctx.lineTo(-4.5 * s, -14 * s);
+  ctx.lineTo(0, -18.5 * s);
+  ctx.lineTo(4.5 * s, -14 * s);
 
-  // Right middle lobe
-  ctx.lineTo(4 * s, -8 * s);
-  ctx.lineTo(8 * s, -11 * s);
-  ctx.lineTo(11 * s, -9 * s);
+  // Upper Right Middle Lobe
+  ctx.lineTo(4.5 * s, -8.5 * s);
+  ctx.lineTo(8.5 * s, -12 * s);
+  ctx.lineTo(12 * s, -10 * s);
 
-  // Bottom right lobe
-  ctx.lineTo(8 * s, -4 * s);
-  ctx.lineTo(14 * s, -2 * s);
-  ctx.lineTo(12 * s, 2 * s);
+  // Lower Right Lobe
+  ctx.lineTo(9 * s, -4.5 * s);
+  ctx.lineTo(15 * s, -2.5 * s);
+  ctx.lineTo(13 * s, 1.5 * s);
   ctx.lineTo(7 * s, 2 * s);
-  ctx.lineTo(9 * s, 6 * s);
+  ctx.lineTo(10 * s, 6 * s);
   ctx.lineTo(6 * s, 8 * s);
   ctx.lineTo(0, 6 * s);
   ctx.closePath();
 
-  ctx.fillStyle = fillColor;
+  ctx.fillStyle = grad;
   ctx.fill();
-  ctx.strokeStyle = strokeColor;
-  ctx.lineWidth = Math.max(0.75, 0.9 * s);
+
+  // Subtle leaf boundary outline
+  ctx.strokeStyle = stemColor;
+  ctx.lineWidth = Math.max(0.65, 0.75 * s);
   ctx.stroke();
 
-  // Primary vein
+  // Main primary stem & vein
   ctx.beginPath();
-  ctx.moveTo(0, 14 * s);
-  ctx.lineTo(0, -14 * s);
-  // Lateral veins
+  ctx.moveTo(0, 15 * s);
+  ctx.lineTo(0, -15 * s);
+
+  // Lateral primary veins spreading to outer lobes
   ctx.moveTo(0, 2 * s);
-  ctx.lineTo(-9 * s, -5 * s);
+  ctx.lineTo(-10 * s, -6 * s);
   ctx.moveTo(0, 2 * s);
-  ctx.lineTo(9 * s, -5 * s);
+  ctx.lineTo(10 * s, -6 * s);
+
   ctx.moveTo(0, 5 * s);
-  ctx.lineTo(-6 * s, 5 * s);
+  ctx.lineTo(-8 * s, 5 * s);
   ctx.moveTo(0, 5 * s);
-  ctx.lineTo(6 * s, 5 * s);
-  ctx.strokeStyle = strokeColor;
-  ctx.lineWidth = Math.max(0.5, 0.6 * s);
+  ctx.lineTo(8 * s, 5 * s);
+
+  ctx.strokeStyle = veinColor;
+  ctx.lineWidth = Math.max(0.5, 0.65 * s);
   ctx.stroke();
 
   ctx.restore();
@@ -109,11 +163,12 @@ function drawMapleLeaf(
 
 export function FallingLeaves({
   className,
-  leafCount = 28,
+  leafCount = 38,
   interactive = true,
+  fullScreen = false,
 }: FallingLeavesProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const mouseRef = useRef({ x: -1000, y: -1000, vx: 0, vy: 0, lastX: 0, lastY: 0 });
+  const mouseRef = useRef({ x: -2000, y: -2000, vx: 0, vy: 0, lastX: 0, lastY: 0 });
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -122,13 +177,18 @@ export function FallingLeaves({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let width = 1200;
-    let height = 800;
+    let width = fullScreen ? window.innerWidth : 1200;
+    let height = fullScreen ? window.innerHeight : 800;
 
     const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      width = Math.max(320, Math.floor(rect.width));
-      height = Math.max(320, Math.floor(rect.height));
+      if (fullScreen) {
+        width = window.innerWidth;
+        height = window.innerHeight;
+      } else {
+        const rect = canvas.getBoundingClientRect();
+        width = Math.max(320, Math.floor(rect.width));
+        height = Math.max(320, Math.floor(rect.height));
+      }
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = width * dpr;
       canvas.height = height * dpr;
@@ -139,32 +199,39 @@ export function FallingLeaves({
     resize();
     window.addEventListener('resize', resize);
 
-    // Initialize realistic maple leaf particles
+    // Initialize autumn maple leaf particles with varying sizes and authentic hues
     const leaves: LeafParticle[] = [];
     for (let i = 0; i < leafCount; i++) {
-      const palette = MAPLE_PALETTE[i % MAPLE_PALETTE.length];
+      const palette = AUTUMN_MAPLE_PALETTES[i % AUTUMN_MAPLE_PALETTES.length];
       leaves.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: 18 + Math.random() * 22,
-        speedY: 0.6 + Math.random() * 0.9,
-        speedX: -0.2 + Math.random() * 0.4,
+        size: 20 + Math.random() * 26, // 20px to 46px realistic maple leaf spans
+        speedY: 0.7 + Math.random() * 0.95, // gentle autumn descent
+        speedX: -0.3 + Math.random() * 0.6, // natural sideways breeze
         rotation: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.02,
+        rotSpeed: (Math.random() - 0.5) * 0.022,
         oscillation: Math.random() * Math.PI * 2,
-        oscSpeed: 0.015 + Math.random() * 0.025,
+        oscSpeed: 0.014 + Math.random() * 0.024,
         flip: Math.random() * Math.PI,
-        flipSpeed: 0.02 + Math.random() * 0.03,
-        color: palette.fill,
-        stemColor: palette.stroke,
+        flipSpeed: 0.018 + Math.random() * 0.028,
+        primaryColor: palette.primary,
+        secondaryColor: palette.secondary,
+        stemColor: palette.stem,
+        veinColor: palette.vein,
+        opacity: 0.82 + Math.random() * 0.16, // rich, vivid visibility (not washed out)
       });
     }
 
     const onPointerMove = (e: PointerEvent) => {
       if (!interactive) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      let x = e.clientX;
+      let y = e.clientY;
+      if (!fullScreen) {
+        const rect = canvas.getBoundingClientRect();
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
+      }
       mouseRef.current.vx = x - mouseRef.current.lastX;
       mouseRef.current.vy = y - mouseRef.current.lastY;
       mouseRef.current.lastX = x;
@@ -174,8 +241,8 @@ export function FallingLeaves({
     };
 
     const onPointerLeave = () => {
-      mouseRef.current.x = -1000;
-      mouseRef.current.y = -1000;
+      mouseRef.current.x = -2000;
+      mouseRef.current.y = -2000;
     };
 
     window.addEventListener('pointermove', onPointerMove, { passive: true });
@@ -194,32 +261,32 @@ export function FallingLeaves({
           leaf.flip += leaf.flipSpeed;
           leaf.rotation += leaf.rotSpeed;
 
-          // Natural drifting flutter
-          const driftX = Math.sin(leaf.oscillation) * 1.1 + leaf.speedX;
+          // Natural swaying leaf drift
+          const driftX = Math.sin(leaf.oscillation) * 1.25 + leaf.speedX;
           leaf.x += driftX;
           leaf.y += leaf.speedY;
 
-          // Mouse wind gust displacement
+          // Interactive wind gust from pointer
           const dx = leaf.x - mouseRef.current.x;
           const dy = leaf.y - mouseRef.current.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140) {
-            const force = (1 - dist / 140) * 3.5;
-            leaf.x += (dx / (dist || 1)) * force + mouseRef.current.vx * 0.12;
-            leaf.y += (dy / (dist || 1)) * force + mouseRef.current.vy * 0.12;
-            leaf.rotation += (dx > 0 ? 1 : -1) * 0.05;
+          if (dist < 160) {
+            const force = (1 - dist / 160) * 4.2;
+            leaf.x += (dx / (dist || 1)) * force + mouseRef.current.vx * 0.14;
+            leaf.y += (dy / (dist || 1)) * force + mouseRef.current.vy * 0.14;
+            leaf.rotation += (dx > 0 ? 1 : -1) * 0.06;
           }
 
-          // Loop back to top when falling past bottom
-          if (leaf.y > height + 40) {
-            leaf.y = -40;
+          // Cycle when falling off the bottom
+          if (leaf.y > height + 50) {
+            leaf.y = -50;
             leaf.x = Math.random() * width;
           }
-          if (leaf.x > width + 40) leaf.x = -40;
-          if (leaf.x < -40) leaf.x = width + 40;
+          if (leaf.x > width + 50) leaf.x = -50;
+          if (leaf.x < -50) leaf.x = width + 50;
         }
 
-        // 3D tumble projection (scaleX simulates leaf flipping in wind)
+        // Realistic 3D leaf tumble (flipping horizontally as it drops)
         const scaleFlip = Math.cos(leaf.flip);
 
         ctx.save();
@@ -227,7 +294,15 @@ export function FallingLeaves({
         ctx.rotate(leaf.rotation);
         ctx.scale(scaleFlip, 1);
 
-        drawMapleLeaf(ctx, leaf.size, leaf.color, leaf.stemColor);
+        drawMapleLeaf(
+          ctx,
+          leaf.size,
+          leaf.primaryColor,
+          leaf.secondaryColor,
+          leaf.stemColor,
+          leaf.veinColor,
+          leaf.opacity
+        );
 
         ctx.restore();
       }
@@ -245,13 +320,19 @@ export function FallingLeaves({
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerleave', onPointerLeave);
     };
-  }, [leafCount, interactive, prefersReducedMotion]);
+  }, [leafCount, interactive, fullScreen, prefersReducedMotion]);
 
   return (
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className={cn('pointer-events-none absolute inset-0 h-full w-full select-none z-10', className)}
+      className={cn(
+        'pointer-events-none select-none',
+        fullScreen
+          ? 'fixed inset-0 h-screen w-screen z-30 pointer-events-none'
+          : 'absolute inset-0 h-full w-full z-10 pointer-events-none',
+        className
+      )}
     />
   );
 }

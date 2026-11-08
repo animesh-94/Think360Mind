@@ -13,7 +13,6 @@ import {
   Building2,
   Sparkles,
 } from 'lucide-react';
-import { FallingLeaves } from '@/components/ui/falling-leaves';
 
 interface ContactFormData {
   firstName: string;
@@ -80,9 +79,6 @@ export function ContactFormGridWithDetails() {
 
   return (
     <div className="relative w-full overflow-hidden rounded-3xl border border-[var(--border-hairline)] bg-[var(--bg-canvas)] shadow-2xl">
-      {/* Interactive Falling Maple Leaves Layer */}
-      <FallingLeaves leafCount={24} interactive={true} />
-
       {/* Grid Pattern Background */}
       <div
         aria-hidden="true"
@@ -466,3 +462,4 @@ export function ContactFormGridWithDetails() {
     </div>
   );
 }
+

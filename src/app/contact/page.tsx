@@ -6,10 +6,19 @@ import { ArrowLeft } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ContactFormGridWithDetails } from '@/components/aceternity/contact-form-grid-with-details';
+import { FallingLeaves } from '@/components/ui/falling-leaves';
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-black selection:bg-black selection:text-white">
+    <div className="relative min-h-screen flex flex-col bg-black selection:bg-black selection:text-white">
+      {/* Full-Screen Natural Autumn Maple Leaves Animation */}
+      <FallingLeaves
+        fullScreen
+        leafCount={42}
+        interactive
+        className="fixed inset-0 z-30 pointer-events-none"
+      />
+
       <Header />
 
       <main
@@ -27,7 +36,7 @@ export default function ContactPage() {
             </Link>
           </div>
 
-          {/* @aceternity/contact-form-grid-with-details + falling-leaves (maple tree) */}
+          {/* @aceternity/contact-form-grid-with-details */}
           <ContactFormGridWithDetails />
         </div>
       </main>
