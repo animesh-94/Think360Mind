@@ -82,9 +82,11 @@ export const HeroParallax = ({
   return (
     <div
       ref={ref}
-      className="h-[300vh] py-40 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="relative flex flex-col self-auto overflow-hidden antialiased py-16 sm:py-28 md:py-40 md:h-[300vh] [perspective:1000px] [transform-style:preserve-3d]"
     >
       <Header />
+
+      {/* Desktop & Tablet Parallax 3D Scroll Flow */}
       <motion.div
         style={{
           rotateX,
@@ -92,9 +94,9 @@ export const HeroParallax = ({
           translateY,
           opacity,
         }}
-        className=""
+        className="hidden md:block"
       >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-12 lg:space-x-20 mb-12 lg:mb-20">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
@@ -103,7 +105,7 @@ export const HeroParallax = ({
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row mb-20 space-x-20">
+        <motion.div className="flex flex-row mb-12 lg:mb-20 space-x-12 lg:space-x-20">
           {secondRow.map((product) => (
             <ProductCard
               product={product}
@@ -112,7 +114,7 @@ export const HeroParallax = ({
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-12 lg:space-x-20">
           {thirdRow.map((product) => (
             <ProductCard
               product={product}
@@ -122,6 +124,41 @@ export const HeroParallax = ({
           ))}
         </motion.div>
       </motion.div>
+
+      {/* Dedicated Mobile Touch-Scroll Carousel (<768px): Reflows naturally without multi-screen vertical lock */}
+      <div className="md:hidden px-4 mt-6">
+        <div className="flex gap-4 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          {products.map((product) => (
+            <div
+              key={`mob-${product.title}`}
+              className="w-[82vw] max-w-[340px] shrink-0 snap-center rounded-2xl border border-[var(--border-hairline)] bg-[var(--bg-elevated)] overflow-hidden shadow-md"
+            >
+              <a href={product.link} className="block relative aspect-[16/11] w-full overflow-hidden">
+                <img
+                  src={product.thumbnail}
+                  alt={product.title}
+                  className="h-full w-full object-cover"
+                />
+              </a>
+              <div className="p-4">
+                <h3 className="font-sans text-sm font-bold text-[var(--text-primary)] leading-snug line-clamp-2">
+                  {product.title}
+                </h3>
+                <a
+                  href={product.link}
+                  className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 text-xs font-bold text-[var(--text-primary)] underline underline-offset-4"
+                >
+                  <span>Explore Project</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-2 text-center text-xs text-[var(--text-muted)] font-mono">
+          Swipe horizontally to explore all 15 flagship deliverables &rarr;
+        </p>
+      </div>
     </div>
   );
 };

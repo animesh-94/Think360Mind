@@ -69,7 +69,7 @@ export const StickyScroll = ({
       ref={ref}
       tabIndex={0}
       aria-label="Platform capabilities scroll showcase"
-      className="relative flex h-[34rem] sm:h-[36rem] justify-between gap-8 lg:gap-12 overflow-y-auto snap-y snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden rounded-3xl border border-neutral-800 px-6 sm:px-12 lg:px-14 text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black dark:focus-visible:outline-white"
+      className="relative flex h-[36rem] sm:h-[38rem] lg:h-[36rem] justify-between gap-6 sm:gap-8 lg:gap-12 overflow-y-auto snap-y snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden rounded-2xl sm:rounded-3xl border border-neutral-800 p-4 sm:p-8 lg:px-14 lg:py-0 text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black dark:focus-visible:outline-white"
     >
       {/* Left Scrolling Column — Each slide occupies full container height; previous/next slides are completely hidden */}
       <div className="relative w-full lg:w-[46%]">
@@ -86,25 +86,25 @@ export const StickyScroll = ({
               transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: "easeOut" }}
               style={{ pointerEvents: isActive ? "auto" : "none" }}
               aria-hidden={!isActive}
-              className="flex h-[34rem] sm:h-[36rem] snap-start snap-always flex-col justify-center px-1 sm:px-2"
+              className="flex h-[36rem] sm:h-[38rem] lg:h-[36rem] snap-start snap-always flex-col justify-center px-1 sm:px-2"
             >
-              <div className="border-l-2 border-white pl-6">
+              <div className="border-l-2 border-white pl-4 sm:pl-6">
                 {item.badge && (
-                  <div className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.22em] text-neutral-400">
+                  <div className="mb-2 sm:mb-3 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-400">
                     0{index + 1} / 0{cardLength} &mdash; {item.badge}
                   </div>
                 )}
 
-                <h3 className="font-sans text-2xl sm:text-4xl lg:text-[40px] font-bold tracking-[-0.03em] leading-[1.1] text-white">
+                <h3 className="font-sans text-xl sm:text-3xl lg:text-[38px] font-bold tracking-[-0.03em] leading-[1.15] text-white">
                   {item.title}
                 </h3>
 
-                <p className="mt-5 max-w-md text-sm sm:text-base leading-relaxed text-neutral-300">
+                <p className="mt-3 sm:mt-5 max-w-md text-xs sm:text-sm lg:text-base leading-relaxed text-neutral-300">
                   {item.description}
                 </p>
 
                 {item.content && (
-                  <div className="mt-6 aspect-[32/26] w-full overflow-hidden rounded-2xl border border-white/15 bg-neutral-950 lg:hidden">
+                  <div className="mt-5 w-full overflow-hidden rounded-xl border border-white/20 bg-neutral-950 lg:hidden shadow-lg aspect-[16/11]">
                     {item.content}
                   </div>
                 )}
@@ -114,8 +114,8 @@ export const StickyScroll = ({
         })}
       </div>
 
-      {/* Right Sticky Visual Preview Card */}
-      <div className="sticky top-0 hidden lg:flex h-[34rem] sm:h-[36rem] items-center shrink-0">
+      {/* Right Sticky Visual Preview Card (Desktop >= 1024px) */}
+      <div className="sticky top-0 hidden lg:flex h-[36rem] items-center shrink-0">
         <div
           className={cn(
             "h-[27.5rem] w-[34rem] overflow-hidden rounded-2xl border border-white/15 bg-neutral-950 shadow-2xl",

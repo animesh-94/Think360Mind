@@ -51,7 +51,7 @@ export function MacbookScroll({ title, badge, children }: MacbookScrollProps) {
   return (
     <div
       ref={ref}
-      className="flex min-h-[48rem] sm:min-h-[60rem] shrink-0 transform flex-col items-center justify-start py-12 sm:py-20 [perspective:1200px] scale-[0.76] sm:scale-95 md:scale-100"
+      className="flex min-h-[38rem] sm:min-h-[50rem] md:min-h-[60rem] shrink-0 transform flex-col items-center justify-start py-8 sm:py-16 md:py-20 [perspective:1200px] scale-[0.62] xs:scale-[0.72] sm:scale-90 md:scale-100 origin-top"
     >
       <motion.div
         style={{

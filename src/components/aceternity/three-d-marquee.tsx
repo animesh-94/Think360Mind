@@ -40,7 +40,7 @@ export function ThreeDMarquee({ items, className }: ThreeDMarqueeProps) {
   return (
     <div
       className={cn(
-        'mx-auto block h-[560px] sm:h-[660px] w-full overflow-hidden rounded-3xl border border-[var(--border-hairline)] bg-[var(--bg-canvas)] relative',
+        'mx-auto block h-[480px] sm:h-[560px] md:h-[660px] w-full overflow-hidden rounded-2xl sm:rounded-3xl border border-[var(--border-hairline)] bg-[var(--bg-canvas)] relative',
         className
       )}
     >
@@ -50,7 +50,7 @@ export function ThreeDMarquee({ items, className }: ThreeDMarqueeProps) {
             transform: 'rotateX(48deg) rotateY(0deg) rotateZ(-38deg)',
             transformStyle: 'preserve-3d',
           }}
-          className="grid w-[1680px] shrink-0 origin-center grid-cols-4 gap-6 sm:gap-8 scale-[0.58] sm:scale-[0.82] lg:scale-100"
+          className="grid w-[1680px] shrink-0 origin-center grid-cols-4 gap-4 sm:gap-6 md:gap-8 scale-[0.44] xs:scale-[0.52] sm:scale-[0.72] md:scale-[0.85] lg:scale-100"
         >
           {chunks.map((subarray, colIndex) => (
             <motion.div
