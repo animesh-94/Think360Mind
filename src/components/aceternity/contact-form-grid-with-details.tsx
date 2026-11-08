@@ -78,21 +78,10 @@ export function ContactFormGridWithDetails() {
   };
 
   return (
-    <div className="relative w-full overflow-hidden rounded-3xl border border-[var(--border-hairline)] bg-[var(--bg-canvas)] shadow-2xl">
-      {/* Grid Pattern Background */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.04] dark:opacity-[0.08]"
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-        }}
-      />
-
-      <div className="relative z-20 grid grid-cols-1 lg:grid-cols-12 min-h-[720px]">
+    <div className="relative w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         {/* Left Column: Contact Details, Studio Hubs & Agency Metadata */}
-        <div className="lg:col-span-5 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[var(--border-hairline)] bg-[var(--bg-elevated)] p-8 sm:p-12 lg:p-14">
+        <div className="lg:col-span-5 flex flex-col justify-between space-y-10">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/10 px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">
               <Sparkles className="size-3.5" aria-hidden="true" />
@@ -186,7 +175,7 @@ export function ContactFormGridWithDetails() {
         </div>
 
         {/* Right Column: Structured Grid Form */}
-        <div className="lg:col-span-7 p-8 sm:p-12 lg:p-14 flex flex-col justify-between">
+        <div className="lg:col-span-7">
           <div>
             <h3 className="font-sans text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)]">
               Send Us Your Brief
