@@ -17,7 +17,6 @@ import {
 } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { FallingLeaves } from '@/components/ui/falling-leaves';
 
 interface ContactFormData {
   firstName: string;
@@ -87,15 +86,8 @@ export default function ContactPage() {
       <div className="relative z-10 bg-[var(--bg-canvas)] text-[var(--text-primary)] rounded-b-[2.5rem] sm:rounded-b-[4rem] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.65)] flex-1 flex flex-col">
         <Header />
 
-        <main id="main-content" className="w-full flex-1 relative overflow-hidden">
-          {/* Natural Autumn Maple Leaves: starts right below the Navbar and strictly bounded above the Footer */}
-          <FallingLeaves
-            leafCount={36}
-            interactive
-            className="absolute inset-0 h-full w-full pointer-events-none z-20"
-          />
-
-          <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 py-8 sm:py-14">
+        <main id="main-content" className="w-full flex-1">
+          <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 py-8 sm:py-14">
             <div className="mb-8">
               <Link
                 href="/"
