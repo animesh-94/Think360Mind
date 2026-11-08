@@ -199,6 +199,14 @@ export function FallingLeaves({
     resize();
     window.addEventListener('resize', resize);
 
+    const resizeObserver = typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(() => resize())
+      : null;
+
+    if (resizeObserver && canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
+
     // Initialize autumn maple leaf particles with varying sizes and authentic hues
     const leaves: LeafParticle[] = [];
     for (let i = 0; i < leafCount; i++) {
@@ -317,6 +325,7 @@ export function FallingLeaves({
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
+      resizeObserver?.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerleave', onPointerLeave);
     };
