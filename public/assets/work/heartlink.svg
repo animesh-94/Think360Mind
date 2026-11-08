@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+    <rect width="1200" height="800" fill="#09090B" />
+    <rect x="28" y="28" width="1144" height="744" rx="28" fill="#121215" stroke="#27272A" stroke-width="3" />
+    <line x1="28" y1="104" x2="1172" y2="104" stroke="#27272A" stroke-width="2" />
+    <circle cx="74" cy="66" r="9" fill="#FFFFFF" />
+    <circle cx="104" cy="66" r="9" fill="#A1A1AA" opacity="0.55" />
+    <circle cx="134" cy="66" r="9" fill="#A1A1AA" opacity="0.25" />
+    <text x="600" y="73" text-anchor="middle" font-family="monospace" font-weight="700" font-size="18" fill="#A1A1AA" letter-spacing="3">03 // HEALTHCARE ACQUISITION</text>
+    <text x="1124" y="75" text-anchor="end" font-family="Arial, sans-serif" font-weight="900" font-size="24" fill="#FFFFFF">#360.</text>
+
+    
+      <circle cx="960" cy="360" r="210" fill="none" stroke="#27272A" stroke-width="2.5" />
+      <circle cx="960" cy="360" r="140" fill="none" stroke="#A1A1AA" stroke-width="2" stroke-dasharray="10 10" />
+      <circle cx="960" cy="360" r="70" fill="#18181B" stroke="#FFFFFF" stroke-width="3" />
+    
+
+    <rect x="84" y="164" width="310" height="50" rx="25" fill="#FFFFFF" />
+    <text x="239" y="196" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="18" fill="#121215" letter-spacing="2.5">HEARTLINK</text>
+
+    <text x="84" y="310" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="56" fill="#FFFFFF" letter-spacing="-1.5">Full-Funnel Patient Trust</text>
+    <text x="84" y="378" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-weight="700" font-size="56" fill="#FFFFFF">& Search Architecture.</text>
+    <text x="84" y="455" font-family="Arial, Helvetica, sans-serif" font-weight="500" font-size="23" fill="#A1A1AA">High-intent medical search engine optimization & paid search funnels.</text>
+
+    <line x1="84" y1="636" x2="1116" y2="636" stroke="#27272A" stroke-width="2" />
+    <text x="84" y="698" font-family="monospace" font-weight="700" font-size="18" fill="#A1A1AA" letter-spacing="2">THINK360 MEDIA // CASE STUDY</text>
+    <rect x="880" y="662" width="236" height="54" rx="27" fill="#FFFFFF" />
+    <text x="998" y="696" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="18" fill="#121215">View Project ↗</text>
+  </svg>

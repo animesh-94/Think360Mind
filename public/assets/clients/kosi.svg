@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="320" viewBox="0 0 800 320">
+      <g fill="#000000">
+        <text x="205" y="215" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="142">K</text>
+        <g transform="translate(375, 162)">
+          <circle cx="0" cy="0" r="62" fill="none" stroke="#000000" stroke-width="22" />
+          <circle cx="0" cy="0" r="16" fill="#000000" />
+          <path d="M -25,-62 C 0,-92 32,-92 52,-76" fill="none" stroke="#000000" stroke-width="14" stroke-linecap="round" />
+        </g>
+        <text x="555" y="215" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="142" letter-spacing="6">SI</text>
+      </g>
+    </svg>
