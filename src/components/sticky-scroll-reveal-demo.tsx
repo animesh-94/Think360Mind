@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { StickyScroll, StickyScrollItem } from "@/components/ui/sticky-scroll-reveal";
+import { PointerHighlight } from "@/components/ui/pointer-highlight";
 
 const content: StickyScrollItem[] = [
   {
@@ -39,7 +40,18 @@ const content: StickyScrollItem[] = [
   },
   {
     badge: "COMMERCE & WEB",
-    title: "Next.js & Shopify Storefronts",
+    title: (
+      <span>
+        Next.js &amp;{" "}
+        <PointerHighlight
+          pointerText="Headless CRO"
+          rectangleClassName="border-emerald-400/70 bg-emerald-500/10"
+          pointerClassName="text-emerald-400"
+        >
+          <span className="text-white">Shopify Storefronts</span>
+        </PointerHighlight>
+      </span>
+    ),
     description:
       "Sub-second storefronts, custom landing pages, and checkout conversion rate optimization engineered for D2C scale.",
     content: (

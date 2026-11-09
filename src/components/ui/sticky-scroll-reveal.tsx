@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export interface StickyScrollItem {
   badge?: string;
-  title: string;
+  title: React.ReactNode;
   description: string;
   content?: React.ReactNode;
 }
@@ -77,7 +77,7 @@ export const StickyScroll = ({
           const isActive = activeCard === index;
           return (
             <motion.div
-              key={item.title + index}
+              key={index}
               initial={{ opacity: index === 0 ? 1 : 0 }}
               animate={{
                 opacity: isActive ? 1 : 0,

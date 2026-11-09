@@ -2,10 +2,38 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 import { Marquee } from './magicui/marquee';
 import { MacbookScroll } from './aceternity/macbook-scroll';
 import { DitherShader } from './ui/dither-shader';
+import { PointerHighlight } from './ui/pointer-highlight';
+
+const CREATOR_TESTIMONIALS = [
+  {
+    name: 'Marcus Vance',
+    src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
+  },
+  {
+    name: 'David Chen',
+    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
+  },
+  {
+    name: 'Elena Rostova',
+    src: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&auto=format&fit=crop&q=80',
+  },
+  {
+    name: 'Sarah Jenkins',
+    src: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&auto=format&fit=crop&q=80',
+  },
+  {
+    name: 'Liam Wright',
+    src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80',
+  },
+  {
+    name: 'Priya Sharma',
+    src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80',
+  },
+];
 
 function StarburstIcon({ className = 'size-9' }: { className?: string }) {
   return (
@@ -55,27 +83,68 @@ export function Hero() {
             />
           </div>
 
-          <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-12">
-            <div className="max-w-4xl">
+          <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-12 text-center">
+            <div className="max-w-4xl mx-auto flex flex-col items-center">
               <h1
                 id="hero-heading"
-                className="font-sans text-[clamp(2.75rem,6vw,5.4rem)] font-bold tracking-[-0.04em] leading-[1.03] text-white"
+                className="font-sans text-[clamp(2.75rem,6.4vw,5.6rem)] font-extrabold tracking-[-0.04em] leading-[1.04] text-white"
               >
-                Your Creative, Media &amp;{' '}
-                <span className="font-display-serif italic font-normal text-neutral-200">
-                  Technology
-                </span>{' '}
-                Transformation Partner.
+                <span className="block bg-gradient-to-b from-white via-neutral-100 to-neutral-400 bg-clip-text text-transparent">
+                  Transform Your
+                </span>
+                <span className="block text-white mt-1">
+                  Marketing with{' '}
+                  <PointerHighlight
+                    pointerText="Proactiv AI"
+                    rectangleClassName="border-white/70 bg-white/10"
+                    pointerClassName="text-white"
+                  >
+                    <span className="text-white">Proactiv</span>
+                  </PointerHighlight>
+                </span>
               </h1>
 
-              <p className="mt-6 text-base sm:text-xl text-neutral-200 font-normal leading-relaxed max-w-2xl">
-                We unite brand strategy, studio film production, performance media, and search engineering under one roof.
+              <p className="mt-6 text-base sm:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl text-center">
+                Automate Campaigns, Engage Audiences, and Boost Lead Generation with Our All-in-One Marketing Solution
               </p>
 
-              <div className="mt-10 flex flex-wrap items-center gap-4">
+              {/* Testimonial & Social Proof Stack */}
+              <div className="mt-8 flex flex-col items-center justify-center gap-2.5">
+                <div className="flex items-center gap-3">
+                  {/* 6 Overlapping Creator Avatars */}
+                  <div className="flex -space-x-2.5 overflow-hidden p-0.5">
+                    {CREATOR_TESTIMONIALS.map((creator, i) => (
+                      <img
+                        key={i}
+                        src={creator.src}
+                        alt={creator.name}
+                        width={40}
+                        height={40}
+                        className="inline-block size-9 sm:size-10 rounded-xl object-cover ring-2 ring-black/80 bg-neutral-800 shadow-md"
+                        loading="eager"
+                      />
+                    ))}
+                  </div>
+
+                  {/* 5 Golden Review Stars */}
+                  <div className="flex items-center gap-0.5 text-amber-400" aria-label="5 out of 5 stars">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="size-4 fill-amber-400 text-amber-400" aria-hidden="true" />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Social Proof Metric */}
+                <p className="text-xs sm:text-sm font-medium text-neutral-400">
+                  Trusted by <span className="text-white font-semibold">27,000+</span> creators
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
                 <Link
                   href="/contact"
-                  className="group inline-flex min-h-[54px] items-center gap-3 rounded-full bg-white text-black px-8 py-4 text-sm font-bold transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                  className="group inline-flex min-h-[54px] items-center gap-3 rounded-full bg-white text-black px-8 py-4 text-sm font-bold transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_28px_rgba(255,255,255,0.18)]"
                 >
                   <span>Start a Transformation</span>
                   <ArrowRight
@@ -86,7 +155,7 @@ export function Hero() {
 
                 <a
                   href="#work"
-                  className="inline-flex min-h-[54px] items-center rounded-full border border-white/30 bg-black/50 px-8 py-4 text-sm font-bold text-white transition-colors duration-200 hover:border-white hover:bg-white/10"
+                  className="inline-flex min-h-[54px] items-center rounded-full border border-white/30 bg-black/50 px-8 py-4 text-sm font-bold text-white transition-colors duration-200 hover:border-white hover:bg-white/10 backdrop-blur-sm"
                 >
                   Explore Selected Work
                 </a>

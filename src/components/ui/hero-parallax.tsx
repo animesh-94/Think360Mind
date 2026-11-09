@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import {
   motion,
   useScroll,
@@ -167,7 +168,14 @@ export const Header = () => {
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
       <h2 className="text-2xl md:text-7xl font-bold text-black dark:text-white">
-        The Ultimate <br /> 360° Creative &amp; Media Studio
+        The Ultimate <br />{" "}
+        <PointerHighlight
+          pointerText="Flagship Lab"
+          rectangleClassName="border-black/60 dark:border-white/60 bg-black/5 dark:bg-white/10"
+          pointerClassName="text-black dark:text-white"
+        >
+          <span>360° Studio</span>
+        </PointerHighlight>
       </h2>
       <p className="max-w-2xl text-base md:text-xl mt-8 text-neutral-700 dark:text-neutral-200">
         We build category-leading brands with integrated strategy, studio film
