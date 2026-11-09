@@ -1,36 +1,24 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { Marquee } from './magicui/marquee';
 import { MacbookScroll } from './aceternity/macbook-scroll';
 import { DitherShader } from './ui/dither-shader';
 
-const CREATOR_TESTIMONIALS = [
-  {
-    name: 'Marcus Vance',
-    src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'David Chen',
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'Elena Rostova',
-    src: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'Sarah Jenkins',
-    src: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'Liam Wright',
-    src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80',
-  },
-  {
-    name: 'Priya Sharma',
-    src: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80',
-  },
+const PRACTICE_PILLS = [
+  { pod: 'POD 01', title: 'Algorithmic Media Buying' },
+  { pod: 'POD 02', title: 'AI Search & GEO Authority' },
+  { pod: 'POD 03', title: 'Cinema Video & Hook Lab' },
+  { pod: 'POD 04', title: 'Sub-Second Storefronts' },
+  { pod: 'POD 05', title: 'Lifecycle & AI CRM' },
+];
+
+const GROWTH_METRICS = [
+  { value: '$180M+', label: 'Managed Media Spend' },
+  { value: '3.4×', label: 'Average Blended ROAS' },
+  { value: '< 0.9s', label: 'Storefront Load Speed' },
+  { value: '10 Pods', label: 'In-House Delivery' },
 ];
 
 function StarburstIcon({ className = 'size-9' }: { className?: string }) {
@@ -83,52 +71,57 @@ export function Hero() {
 
           <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-12 text-center">
             <div className="max-w-4xl mx-auto flex flex-col items-center">
+              {/* Strategic Architecture Eyebrow Pill */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11px] sm:text-xs font-mono font-bold uppercase tracking-[0.2em] text-white/90 backdrop-blur-md mb-6 shadow-[0_0_24px_rgba(255,255,255,0.08)]">
+                <span className="inline-block size-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>THINK360MIND // INTEGRATED GROWTH ENGINE</span>
+              </div>
+
+              {/* Fluid, De-Boxed Display Headline with Typographic Rhythm */}
               <h1
                 id="hero-heading"
-                className="font-sans text-[clamp(2.75rem,6.4vw,5.6rem)] font-extrabold tracking-[-0.04em] leading-[1.04] text-white"
+                className="font-sans text-[clamp(2.75rem,6.6vw,5.75rem)] font-extrabold tracking-[-0.04em] leading-[1.05] text-white"
               >
-                <span className="block bg-gradient-to-b from-white via-neutral-100 to-neutral-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-b from-white via-neutral-100 to-neutral-300 bg-clip-text text-transparent">
                   Transform Your
-                </span>
-                <span className="block text-white mt-1">
-                  Marketing with Think360Mind
-                </span>
+                </span>{' '}
+                <span className="font-display-serif italic font-normal text-neutral-200">
+                  Marketing
+                </span>{' '}
+                <br className="hidden sm:inline" />
+                <span className="text-white">with Think360Mind</span>
               </h1>
 
+              {/* Editorial Subheadline */}
               <p className="mt-6 text-base sm:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl text-center">
                 Automate Campaigns, Engage Audiences, and Boost Lead Generation with Our All-in-One Marketing Solution
               </p>
 
-              {/* Testimonial & Social Proof Stack */}
-              <div className="mt-8 flex flex-col items-center justify-center gap-2.5">
-                <div className="flex items-center gap-3">
-                  {/* 6 Overlapping Creator Avatars */}
-                  <div className="flex -space-x-2.5 overflow-hidden p-0.5">
-                    {CREATOR_TESTIMONIALS.map((creator, i) => (
-                      <img
-                        key={i}
-                        src={creator.src}
-                        alt={creator.name}
-                        width={40}
-                        height={40}
-                        className="inline-block size-9 sm:size-10 rounded-xl object-cover ring-2 ring-black/80 bg-neutral-800 shadow-md"
-                        loading="eager"
-                      />
-                    ))}
+              {/* Relevant Website Practice Capabilities Strip */}
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-3xl">
+                {PRACTICE_PILLS.map((pill, i) => (
+                  <div
+                    key={i}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-3.5 py-1.5 text-xs text-neutral-200 transition-colors hover:border-white/40 hover:bg-white/10"
+                  >
+                    <span className="font-mono text-[10px] font-bold text-neutral-400">{pill.pod}</span>
+                    <span className="font-medium text-white">{pill.title}</span>
                   </div>
+                ))}
+              </div>
 
-                  {/* 5 Golden Review Stars */}
-                  <div className="flex items-center gap-0.5 text-amber-400" aria-label="5 out of 5 stars">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="size-4 fill-amber-400 text-amber-400" aria-hidden="true" />
-                    ))}
+              {/* Key Platform Performance Metrics */}
+              <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-white/10 w-full max-w-3xl">
+                {GROWTH_METRICS.map((metric, i) => (
+                  <div key={i} className="flex flex-col items-center text-center">
+                    <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                      {metric.value}
+                    </div>
+                    <div className="mt-1 text-[11px] sm:text-xs font-mono font-medium text-neutral-400 uppercase tracking-wider">
+                      {metric.label}
+                    </div>
                   </div>
-                </div>
-
-                {/* Social Proof Metric */}
-                <p className="text-xs sm:text-sm font-medium text-neutral-400">
-                  Trusted by <span className="text-white font-semibold">27,000+</span> creators
-                </p>
+                ))}
               </div>
             </div>
           </div>
