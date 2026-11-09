@@ -1,25 +1,10 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Marquee } from './magicui/marquee';
 import { MacbookScroll } from './aceternity/macbook-scroll';
 import { DitherShader } from './ui/dither-shader';
-
-const PRACTICE_PILLS = [
-  { pod: 'POD 01', title: 'Algorithmic Media Buying' },
-  { pod: 'POD 02', title: 'AI Search & GEO Authority' },
-  { pod: 'POD 03', title: 'Cinema Video & Hook Lab' },
-  { pod: 'POD 04', title: 'Sub-Second Storefronts' },
-  { pod: 'POD 05', title: 'Lifecycle & AI CRM' },
-];
-
-const GROWTH_METRICS = [
-  { value: '$180M+', label: 'Managed Media Spend' },
-  { value: '3.4×', label: 'Average Blended ROAS' },
-  { value: '< 0.9s', label: 'Storefront Load Speed' },
-  { value: '10 Pods', label: 'In-House Delivery' },
-];
 
 function StarburstIcon({ className = 'size-9' }: { className?: string }) {
   return (
@@ -71,13 +56,7 @@ export function Hero() {
 
           <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-12 text-center">
             <div className="max-w-4xl mx-auto flex flex-col items-center">
-              {/* Strategic Architecture Eyebrow Pill */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[11px] sm:text-xs font-mono font-bold uppercase tracking-[0.2em] text-white/90 backdrop-blur-md mb-6 shadow-[0_0_24px_rgba(255,255,255,0.08)]">
-                <span className="inline-block size-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>THINK360MIND // INTEGRATED GROWTH ENGINE</span>
-              </div>
-
-              {/* Fluid, De-Boxed Display Headline with Typographic Rhythm */}
+              {/* Fluid Display Headline with Typographic Rhythm */}
               <h1
                 id="hero-heading"
                 className="font-sans text-[clamp(2.75rem,6.6vw,5.75rem)] font-extrabold tracking-[-0.04em] leading-[1.05] text-white"
@@ -96,33 +75,6 @@ export function Hero() {
               <p className="mt-6 text-base sm:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl text-center">
                 Automate Campaigns, Engage Audiences, and Boost Lead Generation with Our All-in-One Marketing Solution
               </p>
-
-              {/* Relevant Website Practice Capabilities Strip */}
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-3xl">
-                {PRACTICE_PILLS.map((pill, i) => (
-                  <div
-                    key={i}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md px-3.5 py-1.5 text-xs text-neutral-200 transition-colors hover:border-white/40 hover:bg-white/10"
-                  >
-                    <span className="font-mono text-[10px] font-bold text-neutral-400">{pill.pod}</span>
-                    <span className="font-medium text-white">{pill.title}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Key Platform Performance Metrics */}
-              <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 pt-8 border-t border-white/10 w-full max-w-3xl">
-                {GROWTH_METRICS.map((metric, i) => (
-                  <div key={i} className="flex flex-col items-center text-center">
-                    <div className="font-sans text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      {metric.value}
-                    </div>
-                    <div className="mt-1 text-[11px] sm:text-xs font-mono font-medium text-neutral-400 uppercase tracking-wider">
-                      {metric.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
