@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { ArrowRight, Star } from 'lucide-react';
 import { Marquee } from './magicui/marquee';
 import { MacbookScroll } from './aceternity/macbook-scroll';
@@ -92,7 +91,7 @@ export function Hero() {
                   Transform Your
                 </span>
                 <span className="block text-white mt-1">
-                  Marketing with Proactiv
+                  Marketing with Think360Mind
                 </span>
               </h1>
 
@@ -130,27 +129,6 @@ export function Hero() {
                 <p className="text-xs sm:text-sm font-medium text-neutral-400">
                   Trusted by <span className="text-white font-semibold">27,000+</span> creators
                 </p>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-                <Link
-                  href="/contact"
-                  className="group inline-flex min-h-[54px] items-center gap-3 rounded-full bg-white text-black px-8 py-4 text-sm font-bold transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_28px_rgba(255,255,255,0.18)]"
-                >
-                  <span>Start a Transformation</span>
-                  <ArrowRight
-                    className="size-4 transition-transform duration-200 group-hover:translate-x-1"
-                    aria-hidden="true"
-                  />
-                </Link>
-
-                <a
-                  href="#work"
-                  className="inline-flex min-h-[54px] items-center rounded-full border border-white/30 bg-black/50 px-8 py-4 text-sm font-bold text-white transition-colors duration-200 hover:border-white hover:bg-white/10 backdrop-blur-sm"
-                >
-                  Explore Selected Work
-                </a>
               </div>
             </div>
           </div>
