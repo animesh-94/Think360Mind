@@ -6,7 +6,6 @@ import { ArrowRight, Star } from 'lucide-react';
 import { Marquee } from './magicui/marquee';
 import { MacbookScroll } from './aceternity/macbook-scroll';
 import { DitherShader } from './ui/dither-shader';
-import { PointerHighlight } from './ui/pointer-highlight';
 
 const CREATOR_TESTIMONIALS = [
   {
@@ -93,14 +92,7 @@ export function Hero() {
                   Transform Your
                 </span>
                 <span className="block text-white mt-1">
-                  Marketing with{' '}
-                  <PointerHighlight
-                    pointerText="Proactiv AI"
-                    rectangleClassName="border-white/70 bg-white/10"
-                    pointerClassName="text-white"
-                  >
-                    <span className="text-white">Proactiv</span>
-                  </PointerHighlight>
+                  Marketing with Proactiv
                 </span>
               </h1>
 
