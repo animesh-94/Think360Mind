@@ -8,6 +8,7 @@ import { ServiceIcon } from './ServiceIcons';
 
 interface SolutionColumn {
   id: string;
+  focusSlug: string;
   line1: string;
   line2: string;
   summary: string;
@@ -17,6 +18,7 @@ interface SolutionColumn {
 const SOLUTIONS: SolutionColumn[] = [
   {
     id: 'brand',
+    focusSlug: 'brand',
     line1: 'Brand',
     line2: 'Solution',
     summary:
@@ -30,6 +32,7 @@ const SOLUTIONS: SolutionColumn[] = [
   },
   {
     id: 'tech',
+    focusSlug: 'tech',
     line1: 'Tech',
     line2: 'Solution',
     summary:
@@ -43,6 +46,7 @@ const SOLUTIONS: SolutionColumn[] = [
   },
   {
     id: 'media',
+    focusSlug: 'media',
     line1: 'Media',
     line2: 'Solution',
     summary:
@@ -56,6 +60,7 @@ const SOLUTIONS: SolutionColumn[] = [
   },
   {
     id: 'research-seo',
+    focusSlug: 'seo',
     line1: 'SEO &',
     line2: 'Research',
     summary:
@@ -69,6 +74,7 @@ const SOLUTIONS: SolutionColumn[] = [
   },
   {
     id: 'film-production',
+    focusSlug: 'film',
     line1: 'Film &',
     line2: 'Production',
     summary:
@@ -128,9 +134,11 @@ export function ServicesBand() {
           return (
             <div
               key={col.id}
+              tabIndex={0}
+              onClick={() => setActiveId(col.id)}
               onMouseEnter={() => setActiveId(col.id)}
               onFocus={() => setActiveId(col.id)}
-              className={`group relative flex flex-col justify-between p-8 sm:p-10 min-h-[420px] lg:min-h-[540px] border-b lg:border-b-0 lg:border-r last:border-r-0 border-[var(--border-hairline)] transition-colors duration-300 ${
+              className={`group relative flex flex-col justify-between p-8 sm:p-10 min-h-[420px] lg:min-h-[540px] border-b lg:border-b-0 lg:border-r last:border-r-0 border-[var(--border-hairline)] transition-colors duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--accent)] ${
                 isActive
                   ? 'bg-[var(--accent-soft)] border-t-2 border-t-[var(--accent)]'
                   : 'bg-[var(--bg-canvas)]'
@@ -178,8 +186,11 @@ export function ServicesBand() {
 
               <div className="mt-8 flex justify-center">
                 <a
-                  href="/contact"
-                  onClick={() => setActiveId(col.id)}
+                  href={`/contact?focus=${col.focusSlug}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveId(col.id);
+                  }}
                   aria-label={`Scope ${col.line1} ${col.line2} with Think360`}
                   className={`inline-flex size-14 items-center justify-center rounded-full border transition-all duration-300 ${
                     isActive

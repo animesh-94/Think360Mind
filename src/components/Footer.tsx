@@ -33,8 +33,9 @@ export function Footer() {
           <div className="flex items-center gap-3 text-white">
             <a
               href="mailto:hello@think360media.com?subject=Think360%20LinkedIn%20Inquiry"
-              aria-label="Contact Think360 Media via LinkedIn Desk"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-white transition-colors"
+              aria-label="Email Think360 Media LinkedIn Desk"
+              title="Email LinkedIn Desk (hello@think360media.com)"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-[#FF4D2E] hover:text-[#FF4D2E] transition-colors"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -54,8 +55,9 @@ export function Footer() {
 
             <a
               href="mailto:hello@think360media.com?subject=Think360%20Instagram%20Reel%20Deck"
-              aria-label="Request Think360 Media Instagram Creative Deck"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-white transition-colors"
+              aria-label="Request Think360 Media Instagram Creative Deck via Email"
+              title="Request Creative Reel Deck via Email"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-[#FF4D2E] hover:text-[#FF4D2E] transition-colors"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -75,8 +77,9 @@ export function Footer() {
 
             <a
               href="mailto:hello@think360media.com?subject=Think360%20YouTube%20Production%20Showreel"
-              aria-label="Request Think360 Media YouTube Production Showreel"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-white transition-colors"
+              aria-label="Request Think360 Media YouTube Production Showreel via Email"
+              title="Request Production Showreel via Email"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-[#FF4D2E] hover:text-[#FF4D2E] transition-colors"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -95,8 +98,9 @@ export function Footer() {
 
             <a
               href="mailto:hello@think360media.com?subject=Think360%20Meta%20Media%20Buying%20Inquiry"
-              aria-label="Contact Think360 Media Paid Social Team"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-white transition-colors"
+              aria-label="Email Think360 Media Paid Social Desk"
+              title="Email Paid Social Desk (hello@think360media.com)"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-white/20 bg-neutral-950 hover:border-[#FF4D2E] hover:text-[#FF4D2E] transition-colors"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -119,34 +123,34 @@ export function Footer() {
           >
             <a
               href="/#about"
-              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:opacity-70 transition-opacity"
+              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:text-[#FF4D2E] transition-colors"
             >
               About
             </a>
             <a
               href="/contact"
-              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:opacity-70 transition-opacity"
+              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:text-[#FF4D2E] transition-colors"
             >
               Contact
             </a>
             <a
               href="/#work"
-              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:opacity-70 transition-opacity"
+              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:text-[#FF4D2E] transition-colors"
             >
               Case Studies
             </a>
             <a
               href="/#insights"
-              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:opacity-70 transition-opacity"
+              className="inline-flex min-h-[44px] items-center px-3 rounded-lg hover:text-[#FF4D2E] transition-colors"
             >
-              Blog
+              Architecture
             </a>
             <button
               type="button"
               onClick={() => setPrivacyOpen(true)}
               aria-haspopup="dialog"
               aria-expanded={privacyOpen}
-              className="inline-flex min-h-[44px] items-center px-3 rounded-lg text-white hover:opacity-70 transition-opacity"
+              className="inline-flex min-h-[44px] items-center px-3 rounded-lg text-white hover:text-[#FF4D2E] transition-colors cursor-pointer"
             >
               Privacy
             </button>

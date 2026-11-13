@@ -60,8 +60,62 @@ export const StickyScroll = ({
 
   const activeBg = backgroundThemes[activeCard % backgroundThemes.length];
 
+  const jumpToCard = (index: number) => {
+    setActiveCard(index);
+    const el = ref.current;
+    if (!el) return;
+    const maxScroll = Math.max(0, el.scrollHeight - el.clientHeight);
+    const targetTop = cardLength > 1 ? (index / (cardLength - 1)) * maxScroll : 0;
+    el.scrollTo({
+      top: targetTop,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  };
+
   return (
-    <motion.div
+    <div className="space-y-4">
+      <div
+        role="tablist"
+        aria-label="Platform capabilities navigation"
+        className="flex flex-wrap items-center justify-between gap-2"
+      >
+        <div className="flex flex-wrap items-center gap-2">
+          {content.map((item, index) => {
+            const isSelected = activeCard === index;
+            return (
+              <button
+                key={index}
+                type="button"
+                role="tab"
+                aria-selected={isSelected}
+                onClick={() => jumpToCard(index)}
+                className={cn(
+                  "inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]",
+                  isSelected
+                    ? "border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--text-primary)]"
+                    : "border-[var(--border-hairline)] bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)]"
+                )}
+              >
+                <span
+                  className={cn(
+                    "font-mono font-bold",
+                    isSelected ? "text-[var(--accent)]" : "text-[var(--text-muted)]"
+                  )}
+                >
+                  0{index + 1}
+                </span>
+                <span>{item.badge ?? `Engine 0${index + 1}`}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <span className="hidden sm:inline-block font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+          Scroll or select step
+        </span>
+      </div>
+
+      <motion.div
       animate={{
         backgroundColor: activeBg,
       }}
@@ -148,5 +202,6 @@ export const StickyScroll = ({
         </div>
       </div>
     </motion.div>
+    </div>
   );
 };

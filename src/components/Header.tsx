@@ -40,7 +40,20 @@ export function Header() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'));
+    try {
+      const savedTheme = localStorage.getItem('think360-theme');
+      const prefersDark = savedTheme === 'dark' || document.documentElement.classList.contains('dark');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+      }
+      setIsDark(prefersDark);
+
+      if (sessionStorage.getItem('think360-banner-dismissed') === '1') {
+        setBannerOpen(false);
+      }
+    } catch {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    }
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
@@ -66,6 +79,20 @@ export function Header() {
     const nextDark = !isDark;
     setIsDark(nextDark);
     document.documentElement.classList.toggle('dark', nextDark);
+    try {
+      localStorage.setItem('think360-theme', nextDark ? 'dark' : 'light');
+    } catch {
+      // ignore storage errors in restricted contexts
+    }
+  };
+
+  const dismissBanner = () => {
+    setBannerOpen(false);
+    try {
+      sessionStorage.setItem('think360-banner-dismissed', '1');
+    } catch {
+      // ignore storage errors in restricted contexts
+    }
   };
 
   return (
@@ -86,7 +113,7 @@ export function Header() {
           </div>
           <button
             type="button"
-            onClick={() => setBannerOpen(false)}
+            onClick={dismissBanner}
             aria-label="Dismiss audit announcement banner"
             className="inline-flex size-7 shrink-0 items-center justify-center rounded-md text-white/80 hover:bg-white/15 hover:text-white"
           >

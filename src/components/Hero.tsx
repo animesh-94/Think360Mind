@@ -79,6 +79,32 @@ export function Hero() {
               <p className="mt-6 text-base sm:text-xl text-neutral-300 font-normal leading-relaxed max-w-2xl text-center">
                 Automate Campaigns, Engage Audiences, and Boost Lead Generation with Our All-in-One Marketing Solution
               </p>
+
+              {/* Quiet Scroll Affordance */}
+              <a
+                href="#about"
+                aria-label="Scroll to explore Think360"
+                className="group mt-12 inline-flex min-h-[44px] flex-col items-center justify-center gap-2 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-400 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D2E]"
+              >
+                <span>Scroll to explore</span>
+                <span className="flex flex-col items-center">
+                  <span className="h-5 w-px bg-gradient-to-b from-[#FF4D2E] to-transparent transition-all duration-300 group-hover:h-7" />
+                  <svg
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    aria-hidden="true"
+                    className="h-3.5 w-3.5 text-[#FF4D2E] transition-transform duration-300 group-hover:translate-y-0.5 motion-safe:animate-bounce"
+                  >
+                    <path
+                      d="M4 6l4 4 4-4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </a>
             </div>
           </div>
         </div>
