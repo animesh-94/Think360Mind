@@ -52,6 +52,10 @@ export function Hero() {
               aria-hidden="true"
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_50%,rgba(0,0,0,0.86)_0%,rgba(0,0,0,0.52)_52%,transparent_88%)]"
             />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_55%,rgba(255,77,46,0.11)_0%,transparent_58%)]"
+            />
           </div>
 
           <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-12 text-center">
@@ -64,7 +68,7 @@ export function Hero() {
                 <span className="bg-gradient-to-b from-white via-neutral-100 to-neutral-300 bg-clip-text text-transparent">
                   Transform Your
                 </span>{' '}
-                <span className="font-display-serif italic font-normal text-neutral-200">
+                <span className="font-display-serif italic font-normal text-[#FF4D2E]">
                   Marketing
                 </span>{' '}
                 <br className="hidden sm:inline" />
@@ -174,7 +178,7 @@ export function Hero() {
               <div className="mt-9">
                 <a
                   href="#services"
-                  className="group inline-flex min-h-[52px] items-center gap-3 rounded-full bg-black text-white dark:bg-white dark:text-black px-9 py-4 text-sm font-bold transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                  className="group inline-flex min-h-[52px] items-center gap-3 rounded-full bg-black text-white dark:bg-white dark:text-black px-9 py-4 text-sm font-bold transition-all duration-200 hover:bg-[var(--accent)] hover:text-white dark:hover:bg-[var(--accent)] dark:hover:text-white hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <span>Dive Into Our Solutions</span>
                   <ArrowRight
@@ -198,7 +202,7 @@ export function Hero() {
             title={
               <h2 className="font-sans text-3xl sm:text-5xl font-bold tracking-[-0.03em] text-[var(--text-primary)]">
                 Crafted for Every Screen.{' '}
-                <span className="font-display-serif italic font-normal">
+                <span className="font-display-serif italic font-normal text-[var(--accent)]">
                   Built to Convert.
                 </span>
               </h2>

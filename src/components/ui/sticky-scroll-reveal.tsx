@@ -88,10 +88,13 @@ export const StickyScroll = ({
               aria-hidden={!isActive}
               className="flex h-[36rem] sm:h-[38rem] lg:h-[36rem] snap-start snap-always flex-col justify-center px-1 sm:px-2"
             >
-              <div className="border-l-2 border-white pl-4 sm:pl-6">
+              <div className="border-l-2 border-[#FF4D2E] pl-4 sm:pl-6">
                 {item.badge && (
                   <div className="mb-2 sm:mb-3 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-400">
-                    0{index + 1} / 0{cardLength} &mdash; {item.badge}
+                    <span className="text-[#FF4D2E]">
+                      0{index + 1} / 0{cardLength}
+                    </span>{' '}
+                    &mdash; {item.badge}
                   </div>
                 )}
 

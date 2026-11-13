@@ -122,7 +122,11 @@ export function Clients() {
         aria-labelledby="worldwide-heading"
         className="relative py-20 sm:py-28 bg-black text-white border-b border-neutral-900 overflow-hidden"
       >
-        <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_50%,rgba(255,77,46,0.12)_0%,transparent_58%)]"
+        />
+        <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
               <h2
@@ -130,7 +134,7 @@ export function Clients() {
                 className="font-sans text-4xl sm:text-6xl font-bold tracking-[-0.035em] leading-[1.05] text-white"
               >
                 Engineered in India.
-                <span className="block font-display-serif italic font-normal text-neutral-200 mt-1">
+                <span className="block font-display-serif italic font-normal text-[#FF4D2E] mt-1">
                   Delivering Worldwide.
                 </span>
               </h2>
@@ -146,7 +150,7 @@ export function Clients() {
 
                 <Link
                   href="/contact"
-                  className="group inline-flex min-h-[50px] items-center gap-3 rounded-full bg-white text-black px-8 py-3.5 text-sm font-bold transition-transform duration-200 hover:scale-[1.02]"
+                  className="group inline-flex min-h-[50px] items-center gap-3 rounded-full bg-white text-black px-8 py-3.5 text-sm font-bold transition-all duration-200 hover:bg-[#FF4D2E] hover:text-white hover:scale-[1.02]"
                 >
                   <span>Start a Global Project</span>
                   <ArrowRight

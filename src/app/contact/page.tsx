@@ -86,8 +86,12 @@ export default function ContactPage() {
       <div className="relative z-10 bg-[var(--bg-canvas)] text-[var(--text-primary)] rounded-b-[2.5rem] sm:rounded-b-[4rem] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.65)] flex-1 flex flex-col">
         <Header />
 
-        <main id="main-content" className="w-full flex-1">
-          <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 py-8 sm:py-14">
+        <main id="main-content" className="w-full flex-1 relative">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--accent-soft)_0%,transparent_55%)]"
+          />
+          <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 py-8 sm:py-14">
             <div className="mb-8">
               <Link
                 href="/"
@@ -104,7 +108,7 @@ export default function ContactPage() {
               <div className="lg:col-span-5 flex flex-col justify-between space-y-10">
                 <div>
                   <div className="inline-flex items-center gap-2 rounded-full border border-black/10 dark:border-white/15 bg-black/5 dark:bg-white/10 px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-widest text-[var(--text-primary)]">
-                    <Sparkles className="size-3.5" aria-hidden="true" />
+                    <Sparkles className="size-3.5 text-[var(--accent)]" aria-hidden="true" />
                     <span>START A TRANSFORMATION</span>
                   </div>
 
@@ -446,7 +450,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={status === 'loading'}
-                        className="group inline-flex min-h-[50px] items-center justify-center gap-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black px-9 py-3.5 text-sm font-bold transition-all duration-200 hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                        className="group inline-flex min-h-[50px] items-center justify-center gap-2.5 rounded-full bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] px-9 py-3.5 text-sm font-bold transition-all duration-200 hover:scale-[1.02] active:scale-95 disabled:opacity-50"
                       >
                         {status === 'loading' ? (
                           <>

@@ -132,7 +132,7 @@ export function CallToAction() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                'radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.78) 55%, #000000 95%)',
+                'radial-gradient(circle at 50% 45%, rgba(255, 77, 46, 0.14) 0%, rgba(0, 0, 0, 0.72) 55%, #000000 95%)',
             }}
             aria-hidden="true"
           />
@@ -166,7 +166,7 @@ export function CallToAction() {
 
             <Link
               href="/contact"
-              className="group mt-6 inline-flex min-h-[46px] items-center gap-2 rounded-full border border-white bg-white px-7 py-3 text-xs sm:text-sm font-extrabold text-black transition-all duration-200 hover:bg-neutral-200 active:scale-95"
+              className="group mt-6 inline-flex min-h-[46px] items-center gap-2 rounded-full border border-[#FF4D2E] bg-[#FF4D2E] px-7 py-3 text-xs sm:text-sm font-extrabold text-white transition-all duration-200 hover:bg-[#E03E22] hover:border-[#E03E22] active:scale-95"
             >
               <span>Book Your Free 360° Audit</span>
               <ChevronRight

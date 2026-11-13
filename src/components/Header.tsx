@@ -78,7 +78,7 @@ export function Header() {
             </span>
             <a
               href="/contact"
-              className="inline-flex items-center gap-1 font-bold underline underline-offset-4 hover:opacity-80"
+              className="inline-flex items-center gap-1 font-bold text-[#FF4D2E] underline underline-offset-4 hover:text-[#FF6B52] transition-colors"
             >
               <span>Check it out here</span>
               <ArrowRight className="size-3.5" aria-hidden="true" />
@@ -215,6 +215,7 @@ export function Header() {
             href="/contact"
             className="hidden sm:inline-flex min-h-[46px] items-center gap-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black px-7 py-3 text-sm font-bold transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] group"
           >
+            <span className="size-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
             <span>Contact Us</span>
             <ArrowRight
               className="size-4 transition-transform duration-200 group-hover:translate-x-1"

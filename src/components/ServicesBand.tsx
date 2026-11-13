@@ -84,7 +84,7 @@ const SOLUTIONS: SolutionColumn[] = [
 
 function PracticePill({ item }: { item: ServiceItem }) {
   return (
-    <div className="flex items-center gap-3.5 rounded-full border border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-5 py-3 shrink-0">
+    <div className="flex items-center gap-3.5 rounded-full border border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-5 py-3 shrink-0 transition-colors duration-200 hover:border-[var(--accent-border)] hover:bg-[var(--accent-soft)]">
       <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black">
         <ServiceIcon name={item.iconName} className="size-4 text-current" />
       </div>
@@ -131,7 +131,9 @@ export function ServicesBand() {
               onMouseEnter={() => setActiveId(col.id)}
               onFocus={() => setActiveId(col.id)}
               className={`group relative flex flex-col justify-between p-8 sm:p-10 min-h-[420px] lg:min-h-[540px] border-b lg:border-b-0 lg:border-r last:border-r-0 border-[var(--border-hairline)] transition-colors duration-300 ${
-                isActive ? 'bg-[var(--bg-elevated)]' : 'bg-[var(--bg-canvas)]'
+                isActive
+                  ? 'bg-[var(--accent-soft)] border-t-2 border-t-[var(--accent)]'
+                  : 'bg-[var(--bg-canvas)]'
               }`}
             >
               <div>
@@ -162,7 +164,9 @@ export function ServicesBand() {
                         className="flex items-center gap-2 text-xs font-semibold text-[var(--text-primary)]"
                       >
                         <span
-                          className="size-1.5 rounded-full bg-[var(--text-primary)] shrink-0"
+                          className={`size-1.5 rounded-full shrink-0 transition-colors duration-300 ${
+                            isActive ? 'bg-[var(--accent)]' : 'bg-[var(--text-primary)]'
+                          }`}
                           aria-hidden="true"
                         />
                         <span>{cap}</span>
@@ -179,7 +183,7 @@ export function ServicesBand() {
                   aria-label={`Scope ${col.line1} ${col.line2} with Think360`}
                   className={`inline-flex size-14 items-center justify-center rounded-full border transition-all duration-300 ${
                     isActive
-                      ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black scale-105'
+                      ? 'border-[var(--accent)] bg-[var(--accent)] text-white scale-105'
                       : 'border-[var(--border-hairline)] bg-transparent text-[var(--text-primary)] group-hover:border-black group-hover:bg-black group-hover:text-white dark:group-hover:border-white dark:group-hover:bg-white dark:group-hover:text-black'
                   }`}
                 >
