@@ -81,7 +81,7 @@ export async function POST(request: Request) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: process.env.CONTACT_FROM_EMAIL || 'Think360 Contact <onboarding@resend.dev>',
+          from: process.env.CONTACT_FROM_EMAIL || 'Think360Media Contact <onboarding@resend.dev>',
           to: [recipientEmail],
           reply_to: email,
           subject: `[${referenceId}] New inquiry from ${name}`,
@@ -105,7 +105,7 @@ export async function POST(request: Request) {
     }
   }
 
-  console.info('[Think360 Contact Inquiry]', {
+  console.info('[Think360Media Contact Inquiry]', {
     referenceId,
     name,
     deliveredVia,

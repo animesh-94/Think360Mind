@@ -1,24 +1,24 @@
 import React from 'react';
 import { Header } from '@/components/Header';
-import { Hero } from '@/components/Hero';
-import { CaseStudies } from '@/components/CaseStudies';
-import { ServicesBand } from '@/components/ServicesBand';
-import { Clients } from '@/components/Clients';
-import { CallToAction } from '@/components/CallToAction';
+import { ElseHeroStage } from '@/components/ElseHeroStage';
+import { ElseAboutSection } from '@/components/ElseAboutSection';
+import { ElseServicesSection } from '@/components/ElseServicesSection';
+import { ElseClientsBand } from '@/components/ElseClientsBand';
+import { ElseContactSection } from '@/components/ElseContactSection';
 import { Footer } from '@/components/Footer';
 
 export default function HomePage() {
   return (
-    <div className="min-h-dvh flex flex-col bg-black relative overflow-x-hidden">
-      <div className="relative z-10 bg-[var(--bg-canvas)] text-[var(--text-primary)] rounded-b-[2.5rem] sm:rounded-b-[4rem] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.65)]">
+    <div className="min-h-dvh flex flex-col bg-black relative overflow-x-clip">
+      <div className="relative z-10 bg-black text-white rounded-b-[2.5rem] sm:rounded-b-[4rem] overflow-x-clip shadow-[0_24px_80px_rgba(0,0,0,0.65)]">
         <Header />
 
-        <main id="main-content" className="w-full">
-          <Hero />
-          <CaseStudies />
-          <ServicesBand />
-          <Clients />
-          <CallToAction />
+        <main id="main-content" className="w-full relative">
+          <ElseHeroStage />
+          <ElseAboutSection />
+          <ElseServicesSection />
+          <ElseClientsBand />
+          <ElseContactSection />
         </main>
       </div>
 

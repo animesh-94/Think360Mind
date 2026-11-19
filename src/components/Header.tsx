@@ -1,64 +1,24 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, ChevronDown, Menu, Moon, Sun, X } from 'lucide-react';
-import { WordRotate } from './magicui/word-rotate';
+import { Menu, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 
-const SOLUTION_LINKS = [
-  {
-    title: 'Brand Solution',
-    desc: 'Brand strategy, identity systems, social media & campaign storytelling.',
-    href: '/#services',
-  },
-  {
-    title: 'Tech Solution',
-    desc: 'Websites, e-commerce storefronts, AI marketing workflows & CRM.',
-    href: '/#services',
-  },
-  {
-    title: 'Media Solution',
-    desc: 'Performance marketing, paid social, search, PR & outdoor media buying.',
-    href: '/#services',
-  },
-  {
-    title: 'SEO & Research',
-    desc: 'Technical SEO, search authority, market research & consumer insights.',
-    href: '/#services',
-  },
-  {
-    title: 'Film & Production',
-    desc: 'Commercial video production, product photography, 3D motion & creator reels.',
-    href: '/#services',
-  },
+const NAV_LINKS = [
+  { label: 'Work', href: '#work' },
+  { label: 'About', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Clients', href: '#clients' },
 ];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [bannerOpen, setBannerOpen] = useState(true);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    try {
-      const savedTheme = localStorage.getItem('think360-theme');
-      const prefersDark = savedTheme === 'dark' || document.documentElement.classList.contains('dark');
-      if (savedTheme === 'dark' || savedTheme === 'light') {
-        document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-      }
-      setIsDark(prefersDark);
-
-      if (sessionStorage.getItem('think360-banner-dismissed') === '1') {
-        setBannerOpen(false);
-      }
-    } catch {
-      setIsDark(document.documentElement.classList.contains('dark'));
-    }
-
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+      setScrolled(window.scrollY > 36);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
@@ -67,7 +27,6 @@ export function Header() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setSolutionsOpen(false);
         setMobileMenuOpen(false);
       }
     };
@@ -75,179 +34,93 @@ export function Header() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const toggleTheme = () => {
-    const nextDark = !isDark;
-    setIsDark(nextDark);
-    document.documentElement.classList.toggle('dark', nextDark);
-    try {
-      localStorage.setItem('think360-theme', nextDark ? 'dark' : 'light');
-    } catch {
-      // ignore storage errors in restricted contexts
-    }
-  };
-
-  const dismissBanner = () => {
-    setBannerOpen(false);
-    try {
-      sessionStorage.setItem('think360-banner-dismissed', '1');
-    } catch {
-      // ignore storage errors in restricted contexts
-    }
-  };
-
   return (
-    <header className="sticky top-0 z-50 w-full bg-[var(--bg-canvas)] text-[var(--text-primary)] border-b border-[var(--border-hairline)] transition-colors duration-200">
-      {bannerOpen && (
-        <div className="bg-black text-white px-4 sm:px-8 py-2 text-xs font-medium flex items-center justify-between gap-4 border-b border-white/15">
-          <div className="mx-auto flex flex-wrap items-center justify-center gap-2 text-center">
-            <span className="inline-block font-semibold">
-              How well is your website really converting? Find out with a free 360° CRO &amp; Growth Audit.
-            </span>
+    <header
+      className={`sticky top-0 z-[60] w-full transition-all duration-300 ${
+        scrolled
+          ? 'bg-black/92 backdrop-blur-md border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.45)]'
+          : 'bg-black border-b border-white/5'
+      } text-white`}
+    >
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 h-[78px] grid grid-cols-3 items-center">
+        {/* Left Zone: Minimal Social Icons (Else Social layout) + Quiet Section Anchors */}
+        <div className="flex items-center gap-5">
+          <div className="hidden sm:flex items-center gap-3.5">
             <a
-              href="/contact"
-              className="inline-flex items-center gap-1 font-bold text-[#FF4D2E] underline underline-offset-4 hover:text-[#FF6B52] transition-colors"
+              href="mailto:hello@think360media.com?subject=Instagram%20Inquiry"
+              aria-label="Instagram"
+              className="inline-flex size-9 items-center justify-center rounded-full text-white/85 hover:text-[#CCFF00] transition-colors"
             >
-              <span>Check it out here</span>
-              <ArrowRight className="size-3.5" aria-hidden="true" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className="size-[17px]" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a
+              href="mailto:hello@think360media.com?subject=Meta%20Paid%20Social%20Inquiry"
+              aria-label="Facebook"
+              className="inline-flex size-9 items-center justify-center rounded-full text-white/85 hover:text-[#CCFF00] transition-colors"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="size-[17px]" aria-hidden="true">
+                <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z" />
+              </svg>
+            </a>
+            <a
+              href="mailto:hello@think360media.com?subject=LinkedIn%20Inquiry"
+              aria-label="LinkedIn"
+              className="inline-flex size-9 items-center justify-center rounded-full text-white/85 hover:text-[#CCFF00] transition-colors"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="size-[16px]" aria-hidden="true">
+                <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7.5 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.8c0-1.86-.03-4.25-2.59-4.25-2.59 0-2.99 2.02-2.99 4.12V23h-4V8z" />
+              </svg>
             </a>
           </div>
+
+          <nav aria-label="Primary navigation" className="hidden xl:flex items-center gap-5 pl-4 border-l border-white/15">
+            {NAV_LINKS.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-300 hover:text-[#CCFF00] transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Trigger (Left on mobile) */}
           <button
             type="button"
-            onClick={dismissBanner}
-            aria-label="Dismiss audit announcement banner"
-            className="inline-flex size-7 shrink-0 items-center justify-center rounded-md text-white/80 hover:bg-white/15 hover:text-white"
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            className="inline-flex sm:hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/15 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors"
           >
-            <X className="size-3.5" aria-hidden="true" />
+            {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
         </div>
-      )}
 
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12 h-[72px] flex items-center justify-between">
-        <a
-          href="/"
-          aria-label="Think360 Media Home"
-          className="inline-flex min-h-[44px] items-baseline gap-1.5 py-2 focus-visible:outline-2"
-        >
-          <span className="font-sans text-2xl sm:text-[28px] font-black tracking-[-0.04em] text-[var(--text-primary)] transition-all duration-300">
-            {scrolled ? '#360.' : 'Think360.'}
-          </span>
-          <span className="font-sans text-sm sm:text-base font-bold tracking-tight text-[var(--text-primary)]">
-            <WordRotate
-              duration={2400}
-              words={['Brands', 'Tech', 'Media', 'Motion Pictures', 'Search']}
-            />
-          </span>
-        </a>
-
-        <nav
-          aria-label="Primary navigation"
-          className="hidden lg:flex items-center gap-1 xl:gap-2"
-        >
+        {/* Center Zone: Bold Centered Wordmark (Exact Else Social Focal Alignment) */}
+        <div className="flex justify-center">
           <a
-            href="/#work"
-            className="inline-flex min-h-[44px] items-center px-4 text-sm font-semibold text-[var(--text-primary)] hover:opacity-65 transition-opacity"
+            href="#home"
+            aria-label="Think360Media Home"
+            className="group inline-flex min-h-[44px] items-center font-sans text-xl sm:text-[26px] font-black tracking-[-0.04em] text-white transition-transform duration-200 hover:scale-[1.03]"
           >
-            Work
+            <span>Think360Media</span>
+            <span className="text-[#CCFF00] transition-transform duration-300 group-hover:scale-125">.</span>
           </a>
+        </div>
 
-          <div
-            className="relative"
-            onMouseEnter={() => setSolutionsOpen(true)}
-            onMouseLeave={() => setSolutionsOpen(false)}
-          >
-            <button
-              type="button"
-              onClick={() => setSolutionsOpen((prev) => !prev)}
-              aria-expanded={solutionsOpen}
-              aria-controls="solutions-dropdown"
-              className="inline-flex min-h-[44px] items-center gap-1.5 px-4 text-sm font-semibold text-[var(--text-primary)] hover:opacity-65 transition-opacity"
-            >
-              <span>Solutions</span>
-              <ChevronDown
-                className={`size-4 transition-transform duration-200 ${
-                  solutionsOpen ? 'rotate-180' : ''
-                }`}
-                aria-hidden="true"
-              />
-            </button>
-
-            {solutionsOpen && (
-              <div
-                id="solutions-dropdown"
-                className="absolute left-0 top-full pt-2 w-[540px] z-50"
-              >
-                <div className="rounded-2xl border border-[var(--border-hairline)] bg-[var(--bg-canvas)] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.18)] grid grid-cols-2 gap-3">
-                  {SOLUTION_LINKS.map((item) => (
-                    <a
-                      key={item.title}
-                      href={item.href}
-                      onClick={() => setSolutionsOpen(false)}
-                      className="group rounded-xl border border-transparent hover:border-[var(--border-hairline)] hover:bg-[var(--bg-elevated)] p-3.5 transition-all"
-                    >
-                      <div className="flex items-center justify-between text-sm font-bold text-[var(--text-primary)]">
-                        <span>{item.title}</span>
-                        <ArrowRight
-                          className="size-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <p className="mt-1 text-xs text-[var(--text-muted)] leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
+        {/* Right Zone: Signature White Pill CONTACT CTA -> Neon Glow Hover */}
+        <div className="flex items-center justify-end gap-3">
           <a
-            href="/#about"
-            className="inline-flex min-h-[44px] items-center px-4 text-sm font-semibold text-[var(--text-primary)] hover:opacity-65 transition-opacity"
+            href="#contact"
+            className="inline-flex min-h-[40px] sm:min-h-[42px] items-center justify-center rounded-full bg-white px-5 sm:px-8 py-2 font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] text-black transition-all duration-300 hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_24px_rgba(204,255,0,0.5)] hover:scale-[1.03] active:scale-[0.98]"
           >
-            About
-          </a>
-
-          <a
-            href="/#insights"
-            className="inline-flex min-h-[44px] items-center px-4 text-sm font-semibold text-[var(--text-primary)] hover:opacity-65 transition-opacity"
-          >
-            Resources
-          </a>
-
-          <a
-            href="/#clients"
-            className="inline-flex min-h-[44px] items-center px-4 text-sm font-semibold text-[var(--text-primary)] hover:opacity-65 transition-opacity"
-          >
-            Clients
-          </a>
-        </nav>
-
-        <div className="flex items-center gap-2.5">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-pressed={isDark}
-            aria-label={isDark ? 'Switch to white mode' : 'Switch to dark mode'}
-            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[var(--border-hairline)] bg-[var(--bg-elevated)] px-3 text-xs font-bold text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-colors"
-          >
-            {isDark ? (
-              <Sun className="size-4" aria-hidden="true" />
-            ) : (
-              <Moon className="size-4" aria-hidden="true" />
-            )}
-          </button>
-
-          <a
-            href="/contact"
-            className="hidden sm:inline-flex min-h-[46px] items-center gap-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black px-7 py-3 text-sm font-bold transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] group"
-          >
-            <span className="size-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
-            <span>Contact Us</span>
-            <ArrowRight
-              className="size-4 transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true"
-            />
+            CONTACT
           </a>
 
           <button
@@ -255,61 +128,48 @@ export function Header() {
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav-drawer"
-            className="inline-flex lg:hidden min-h-[44px] items-center gap-2 rounded-full border border-[var(--border-hairline)] px-4 py-2 text-xs font-bold text-[var(--text-primary)]"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            className="hidden sm:inline-flex xl:hidden min-h-[42px] min-w-[42px] items-center justify-center rounded-full border border-white/20 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors"
           >
-            {mobileMenuOpen ? (
-              <>
-                <X className="size-4" aria-hidden="true" />
-                <span>Close</span>
-              </>
-            ) : (
-              <>
-                <Menu className="size-4" aria-hidden="true" />
-                <span>Menu</span>
-              </>
-            )}
+            {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
         </div>
       </div>
 
-      {mobileMenuOpen && (
-        <nav
-          id="mobile-nav-drawer"
-          aria-label="Mobile navigation"
-          className="lg:hidden border-t border-[var(--border-hairline)] bg-[var(--bg-canvas)] px-4 py-5"
-        >
-          <ul className="flex flex-col gap-1">
-            {[
-              { label: 'Work', href: '/#work' },
-              { label: 'Solutions', href: '/#services' },
-              { label: 'About', href: '/#about' },
-              { label: 'Resources', href: '/#insights' },
-              { label: 'Clients', href: '/#clients' },
-            ].map((item) => (
-              <li key={item.label}>
+      {/* Animated Slide-Down Menu Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            id="mobile-nav-drawer"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="xl:hidden overflow-hidden border-t border-white/10 bg-black/98 backdrop-blur-xl"
+          >
+            <nav className="mx-auto max-w-[1440px] px-6 py-6 flex flex-col gap-2">
+              {NAV_LINKS.map((item) => (
                 <a
+                  key={item.label}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex min-h-[44px] items-center justify-between rounded-xl px-4 py-3 text-base font-bold text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
+                  className="flex min-h-[48px] items-center justify-between border-b border-white/10 font-sans text-lg font-bold uppercase tracking-wider text-white hover:text-[#CCFF00] transition-colors"
                 >
                   <span>{item.label}</span>
-                  <ArrowRight className="size-4" aria-hidden="true" />
+                  <span className="font-mono text-xs text-[#CCFF00]">&rarr;</span>
                 </a>
-              </li>
-            ))}
-            <li className="pt-3">
+              ))}
               <a
-                href="/contact"
+                href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-black text-white dark:bg-white dark:text-black px-6 py-3.5 text-sm font-bold"
+                className="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-full bg-[#CCFF00] px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-black"
               >
-                <span>Contact Us</span>
-                <ArrowRight className="size-4" aria-hidden="true" />
+                START A PROJECT
               </a>
-            </li>
-          </ul>
-        </nav>
-      )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
