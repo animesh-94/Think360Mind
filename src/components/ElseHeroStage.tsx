@@ -12,6 +12,8 @@ import {
 import { ArrowUpRight, X } from 'lucide-react';
 import { Hero } from './Hero';
 
+const SMOOTH_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 interface ShowcaseWork {
   id: string;
   client: string;
@@ -27,7 +29,7 @@ const STAGE_CARDS: ShowcaseWork[] = [
   {
     id: 'heartlink',
     client: 'HeartLink Health',
-    tag: 'DIGITAL PRODUCT & SEARCH',
+    tag: 'Digital Product & Search',
     title: 'Connected Cardiac Care & Patient Funnels',
     image: '/assets/work/heartlink.jpg',
     challenge: 'Drive high-intent patient bookings across regional specialties with frictionless mobile scheduling.',
@@ -37,7 +39,7 @@ const STAGE_CARDS: ShowcaseWork[] = [
   {
     id: 'belluret',
     client: 'Bellurét Paris',
-    tag: 'LUXURY D2C FLAGSHIP & FILM',
+    tag: 'Luxury D2C Flagship & Film',
     title: 'Haute Horlogerie Storefront & Launch Film',
     image: '/assets/work/belluret.jpg',
     challenge: 'Pair editorial luxury desire with sub-second checkout speed and automated VIP clienteling.',
@@ -47,7 +49,7 @@ const STAGE_CARDS: ShowcaseWork[] = [
   {
     id: 'urban-dancera',
     client: 'Urban Dancera',
-    tag: 'STUDIO PRODUCTION & REELS',
+    tag: 'Studio Production & Reels',
     title: 'Soundstage Direction & Creator Velocity',
     image: '/assets/work/urban-dancera.jpg',
     challenge: 'Sustain thumb-stopping visual energy across weekly vertical reels and paid social whitelisting.',
@@ -60,7 +62,7 @@ const EXTRA_WORKS: ShowcaseWork[] = [
   {
     id: 'swan-energy',
     client: 'Swan Energy',
-    tag: 'ENTERPRISE WEB & SEO',
+    tag: 'Enterprise Web & SEO',
     title: 'Enterprise Infrastructure Portal',
     image: '/assets/work/swan-energy.jpg',
     challenge: 'Consolidate complex industrial divisions into one unified, fast-loading investor & B2B portal.',
@@ -70,7 +72,7 @@ const EXTRA_WORKS: ShowcaseWork[] = [
   {
     id: 'arch-events',
     client: 'Arch Events',
-    tag: 'EXPERIENTIAL BRANDING',
+    tag: 'Experiential Branding',
     title: 'Spatial Identity & Live Stagecraft',
     image: '/assets/work/arch-events.jpg',
     challenge: 'Elevate an experiential production house with an unmistakable visual and physical identity.',
@@ -80,7 +82,7 @@ const EXTRA_WORKS: ShowcaseWork[] = [
   {
     id: 'kosi',
     client: 'Kosi Studio',
-    tag: '3D FILM & GOOGLE PMAX',
+    tag: '3D Film & Google PMax',
     title: 'Precision Acoustic Hardware Launch',
     image: '/assets/work/kosi.jpg',
     challenge: 'Translate machined industrial craftsmanship into high-converting Shopping & YouTube ads.',
@@ -90,7 +92,7 @@ const EXTRA_WORKS: ShowcaseWork[] = [
   {
     id: 'kamats-legacy',
     client: "Kamat's Legacy",
-    tag: 'HOSPITALITY REBRAND',
+    tag: 'Hospitality Rebrand',
     title: 'Heritage Culinary Identity & Local GEO',
     image: '/assets/work/kamats-legacy.jpg',
     challenge: 'Refresh a storied hospitality brand for modern diners while preserving heritage equity.',
@@ -100,7 +102,7 @@ const EXTRA_WORKS: ShowcaseWork[] = [
   {
     id: 'kidway-global',
     client: 'Kidway Global',
-    tag: 'D2C RETAIL & META ADS',
+    tag: 'D2C Retail & Meta Ads',
     title: 'Family Commerce & Advantage+ Engine',
     image: '/assets/work/kidway-global.jpg',
     challenge: 'Scale family retail awareness while keeping blended acquisition costs disciplined.',
@@ -121,26 +123,31 @@ export function ElseHeroStage() {
     offset: ['start start', 'end end'],
   });
 
+  // Silky high-inertia luxury spring smoothing for scroll-driven transitions
   const smooth = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
-    mass: 0.35,
+    stiffness: 65,
+    damping: 24,
+    mass: 0.6,
   });
 
-  // Exact video choreography (00:00 -> 00:05):
-  // 1) Center card rises first directly over pinned Hero (0.04 -> 0.28), holds, then exits up (0.76 -> 0.98)
-  const centerY = useTransform(smooth, [0.02, 0.28, 0.74, 0.98], ['105vh', '0vh', '0vh', '-115vh']);
-  const centerScale = useTransform(smooth, [0.02, 0.28, 0.74, 0.98], [0.94, 1, 1, 0.96]);
+  // 1) Center card rises first directly over pinned Hero, holds, then glides smoothly out
+  const centerY = useTransform(smooth, [0.02, 0.28, 0.72, 0.98], ['105vh', '0vh', '0vh', '-115vh']);
+  const centerScale = useTransform(smooth, [0.02, 0.28, 0.72, 0.98], [0.92, 1, 1, 0.95]);
+  const centerOpacity = useTransform(smooth, [0.01, 0.12, 0.88, 0.99], [0, 1, 1, 0]);
 
-  // 2) Left card rises second (0.14 -> 0.40), holds slightly higher (-3vh), then exits up with group
-  const leftY = useTransform(smooth, [0.14, 0.4, 0.74, 0.98], ['115vh', '-3vh', '-3vh', '-118vh']);
+  // 2) Left card rises second (slightly higher), holds, then glides out
+  const leftY = useTransform(smooth, [0.14, 0.4, 0.72, 0.98], ['115vh', '-3vh', '-3vh', '-118vh']);
+  const leftScale = useTransform(smooth, [0.14, 0.4, 0.72, 0.98], [0.92, 1, 1, 0.95]);
+  const leftOpacity = useTransform(smooth, [0.12, 0.24, 0.88, 0.99], [0, 1, 1, 0]);
 
-  // 3) Right card rises third (0.24 -> 0.50), holds slightly lower (+4vh), then exits up with group
-  const rightY = useTransform(smooth, [0.24, 0.5, 0.74, 0.98], ['120vh', '4vh', '4vh', '-112vh']);
+  // 3) Right card rises third (slightly lower), holds, then glides out
+  const rightY = useTransform(smooth, [0.24, 0.5, 0.72, 0.98], ['120vh', '4vh', '4vh', '-112vh']);
+  const rightScale = useTransform(smooth, [0.24, 0.5, 0.72, 0.98], [0.92, 1, 1, 0.95]);
+  const rightOpacity = useTransform(smooth, [0.22, 0.34, 0.88, 0.99], [0, 1, 1, 0]);
 
-  // 4) Giant monumental "THINK360" letters sweep UPWARD behind the 3 pinned cards (0.38 -> 0.78)
-  const wordY = useTransform(smooth, [0.36, 0.56, 0.8], ['85vh', '0vh', '-95vh']);
-  const wordOpacity = useTransform(smooth, [0.36, 0.48, 0.68, 0.8], [0, 0.96, 0.96, 0]);
+  // 4) Giant monumental "THINK360MEDIA" letters sweep smoothly IN FRONT OF the 3 pinned cards
+  const wordY = useTransform(smooth, [0.36, 0.56, 0.82], ['80vh', '0vh', '-90vh']);
+  const wordOpacity = useTransform(smooth, [0.35, 0.48, 0.68, 0.82], [0, 0.96, 0.96, 0]);
 
   useEffect(() => {
     if (!selectedWork) return;
@@ -153,24 +160,27 @@ export function ElseHeroStage() {
 
   return (
     <div ref={trackRef} className="relative w-full bg-black">
-      {/* Sticky Pinned Hero Layer (00:00 -> 00:05): stays frozen behind rising vertical cards */}
+      {/* Sticky Pinned Hero Layer */}
       <div className="sticky top-0 z-0 min-h-screen w-full flex items-center bg-black">
         <Hero />
       </div>
 
-      {/* Desktop Rising Vertical Showcase Overlay Track (directly overlaps pinned Hero) */}
+      {/* Desktop Rising Vertical Showcase Overlay Track */}
       <div
         aria-label="Featured Work Showcase"
         className="relative z-10 hidden lg:block h-[330vh] -mt-[100vh] pointer-events-none"
       >
         <span id="work" className="absolute top-[24%] left-0 pointer-events-none" aria-hidden="true" />
         <div className="sticky top-0 h-screen w-full overflow-clip flex items-center justify-center px-8">
-          {/* 3 Staggered Rising Cards (z-20) — slimmer vertical portrait width */}
+          {/* 3 Staggered Rising Cards (z-20) */}
           <div className="relative z-20 mx-auto w-full max-w-[1080px] grid grid-cols-12 items-center gap-8 xl:gap-10 pointer-events-auto">
-            {/* Left Staggered Card */}
             <motion.div
-              style={{ y: prefersReducedMotion ? 0 : leftY }}
-              className="col-span-4 flex justify-center"
+              style={{
+                y: prefersReducedMotion ? 0 : leftY,
+                scale: prefersReducedMotion ? 1 : leftScale,
+                opacity: prefersReducedMotion ? 1 : leftOpacity,
+              }}
+              className="col-span-4 flex justify-center will-change-transform"
             >
               <StageReelCard
                 work={STAGE_CARDS[0]}
@@ -179,13 +189,13 @@ export function ElseHeroStage() {
               />
             </motion.div>
 
-            {/* Center Dominant Featured Card */}
             <motion.div
               style={{
                 y: prefersReducedMotion ? 0 : centerY,
                 scale: prefersReducedMotion ? 1 : centerScale,
+                opacity: prefersReducedMotion ? 1 : centerOpacity,
               }}
-              className="col-span-4 flex justify-center"
+              className="col-span-4 flex justify-center will-change-transform"
             >
               <StageReelCard
                 work={STAGE_CARDS[1]}
@@ -195,10 +205,13 @@ export function ElseHeroStage() {
               />
             </motion.div>
 
-            {/* Right Staggered Card */}
             <motion.div
-              style={{ y: prefersReducedMotion ? 0 : rightY }}
-              className="col-span-4 flex justify-center"
+              style={{
+                y: prefersReducedMotion ? 0 : rightY,
+                scale: prefersReducedMotion ? 1 : rightScale,
+                opacity: prefersReducedMotion ? 1 : rightOpacity,
+              }}
+              className="col-span-4 flex justify-center will-change-transform"
             >
               <StageReelCard
                 work={STAGE_CARDS[2]}
@@ -215,7 +228,7 @@ export function ElseHeroStage() {
               y: prefersReducedMotion ? 0 : wordY,
               opacity: prefersReducedMotion ? 0.15 : wordOpacity,
             }}
-            className="pointer-events-none select-none absolute inset-0 z-30 flex items-center justify-center"
+            className="pointer-events-none select-none will-change-transform absolute inset-0 z-30 flex items-center justify-center"
           >
             <div className="w-full max-w-[1440px] px-6 flex items-center justify-between font-sans font-black uppercase text-[clamp(3.25rem,8.8vw,8.75rem)] leading-none tracking-[-0.03em] text-white drop-shadow-[0_14px_40px_rgba(0,0,0,0.85)]">
               <span>T</span>
@@ -236,17 +249,20 @@ export function ElseHeroStage() {
         </div>
       </div>
 
-      {/* Mobile & Tablet Clean Staggered Showcase (< 1024px) */}
+      {/* Mobile & Tablet Showcase (< 1024px) */}
       <div
         id="work-mobile"
         className="relative z-10 lg:hidden bg-black px-5 py-16 border-t border-white/10"
       >
         <div className="mb-8 text-center">
-          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.26em] text-[#CCFF00]">
-            SELECTED WORK
+          <span className="font-sans text-xs font-bold uppercase tracking-[0.22em] text-[#CCFF00]">
+            Selected Work
           </span>
-          <h2 className="mt-2 font-sans text-3xl font-extrabold uppercase tracking-tight text-white">
-            THINK360MEDIA IN MOTION
+          <h2 className="mt-2 font-sans text-3xl font-extrabold tracking-[-0.03em] text-white">
+            Think360Media{' '}
+            <span className="font-display-serif italic font-normal text-[#CCFF00]">
+              in Motion
+            </span>
           </h2>
         </div>
 
@@ -263,14 +279,14 @@ export function ElseHeroStage() {
         </div>
       </div>
 
-      {/* Interactive Case Study Quick-View Modal (with switcher across all Think360 client work) */}
+      {/* Interactive Case Study Quick-View Modal */}
       <AnimatePresence>
         {selectedWork && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.3, ease: SMOOTH_EASE }}
             onClick={() => setSelectedWork(null)}
             role="dialog"
             aria-modal="true"
@@ -278,10 +294,10 @@ export function ElseHeroStage() {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 p-4 backdrop-blur-md"
           >
             <motion.div
-              initial={{ opacity: 0, y: 18, scale: 0.97 }}
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 12, scale: 0.97 }}
-              transition={{ duration: 0.22, ease: 'easeOut' }}
+              exit={{ opacity: 0, y: 12, scale: 0.96 }}
+              transition={{ duration: 0.35, ease: SMOOTH_EASE }}
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-white/15 bg-[#0A0A0A] text-white shadow-[0_28px_80px_rgba(0,0,0,0.85)]"
             >
@@ -289,7 +305,7 @@ export function ElseHeroStage() {
                 type="button"
                 onClick={() => setSelectedWork(null)}
                 aria-label="Close case study details"
-                className="absolute top-4 right-4 z-10 inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-black/80 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors"
+                className="absolute top-4 right-4 z-10 inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-black/80 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors duration-300"
               >
                 <X className="size-4" />
               </button>
@@ -303,7 +319,6 @@ export function ElseHeroStage() {
               </div>
 
               <div className="p-6 sm:p-8 space-y-5">
-                {/* Quick Project Switcher Strip */}
                 <div className="flex flex-wrap gap-1.5">
                   {ALL_WORKS.map((item) => {
                     const active = item.id === selectedWork.id;
@@ -312,7 +327,7 @@ export function ElseHeroStage() {
                         key={item.id}
                         type="button"
                         onClick={() => setSelectedWork(item)}
-                        className={`rounded-full px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider transition-colors ${
+                        className={`rounded-full px-3.5 py-1 font-sans text-xs font-semibold transition-colors duration-300 ${
                           active
                             ? 'bg-[#CCFF00] text-black'
                             : 'border border-white/15 bg-white/5 text-neutral-300 hover:border-white/40 hover:text-white'
@@ -325,36 +340,36 @@ export function ElseHeroStage() {
                 </div>
 
                 <div>
-                  <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#CCFF00]">
+                  <span className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#CCFF00]">
                     {selectedWork.tag}
                   </span>
-                  <h3 id="stage-modal-title" className="mt-1.5 font-sans text-2xl font-extrabold text-white">
+                  <h3 id="stage-modal-title" className="mt-1.5 font-sans text-2xl font-extrabold tracking-tight text-white">
                     {selectedWork.client} &mdash; {selectedWork.title}
                   </h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-y border-white/10 py-4">
                   <div>
-                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
-                      MANDATE
+                    <div className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-400">
+                      Mandate
                     </div>
-                    <p className="mt-1.5 text-xs leading-relaxed text-neutral-200">
+                    <p className="mt-1.5 font-sans text-xs leading-relaxed text-neutral-200">
                       {selectedWork.challenge}
                     </p>
                   </div>
                   <div>
-                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
-                      ARCHITECTURE
+                    <div className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-400">
+                      Architecture
                     </div>
-                    <p className="mt-1.5 text-xs leading-relaxed text-neutral-200">
+                    <p className="mt-1.5 font-sans text-xs leading-relaxed text-neutral-200">
                       {selectedWork.architecture}
                     </p>
                   </div>
                   <div>
-                    <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400">
-                      DELIVERABLE
+                    <div className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-400">
+                      Deliverable
                     </div>
-                    <p className="mt-1.5 text-xs font-bold leading-relaxed text-[#CCFF00]">
+                    <p className="mt-1.5 font-sans text-xs font-bold leading-relaxed text-[#CCFF00]">
                       {selectedWork.deliverable}
                     </p>
                   </div>
@@ -364,14 +379,14 @@ export function ElseHeroStage() {
                   <button
                     type="button"
                     onClick={() => setSelectedWork(null)}
-                    className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-5 py-2 font-mono text-xs uppercase tracking-wider text-neutral-300 hover:border-white hover:text-white transition-colors"
+                    className="inline-flex min-h-[44px] items-center rounded-full border border-white/20 px-5 py-2 font-sans text-xs font-semibold text-neutral-300 hover:border-white hover:text-white transition-colors duration-300"
                   >
                     Close
                   </button>
                   <a
                     href="#contact"
                     onClick={() => setSelectedWork(null)}
-                    className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#CCFF00] px-6 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.14em] text-black transition-all hover:bg-[#DCFF4D] hover:shadow-[0_0_24px_rgba(204,255,0,0.45)]"
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#CCFF00] px-6 py-2.5 font-sans text-xs font-bold text-black transition-all duration-300 hover:bg-[#DCFF4D] hover:shadow-[0_0_24px_rgba(204,255,0,0.45)]"
                   >
                     <span>Start Similar Project</span>
                     <ArrowUpRight className="size-4" aria-hidden="true" />
@@ -405,25 +420,25 @@ function StageReelCard({
         featured
           ? 'border-[#CCFF00]/50 shadow-[0_36px_95px_rgba(0,0,0,0.92)]'
           : 'border-white/20 shadow-[0_28px_80px_rgba(0,0,0,0.85)]'
-      } bg-neutral-950 text-left transition-all duration-300 hover:border-[#CCFF00] hover:shadow-[0_0_40px_rgba(204,255,0,0.28)]`}
+      } bg-neutral-950 text-left transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[#CCFF00] hover:shadow-[0_0_40px_rgba(204,255,0,0.28)]`}
     >
       <img
         src={work.image}
         alt={work.client}
-        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-transparent" />
-      <div className="absolute top-4 right-4 inline-flex size-10 items-center justify-center rounded-full border border-white/25 bg-black/70 text-white backdrop-blur-md transition-all duration-300 group-hover:border-[#CCFF00] group-hover:bg-[#CCFF00] group-hover:text-black">
+      <div className="absolute top-4 right-4 inline-flex size-10 items-center justify-center rounded-full border border-white/25 bg-black/70 text-white backdrop-blur-md transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-[#CCFF00] group-hover:bg-[#CCFF00] group-hover:text-black">
         <ArrowUpRight className="size-4" aria-hidden="true" />
       </div>
-      <div className="absolute inset-x-0 bottom-0 p-6">
-        <span className="inline-block rounded-full border border-[#CCFF00]/45 bg-black/75 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#CCFF00] backdrop-blur-sm">
+      <div className="absolute inset-x-0 bottom-0 p-5">
+        <span className="inline-block rounded-full border border-[#CCFF00]/45 bg-black/75 px-3 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-[#CCFF00] backdrop-blur-sm">
           {work.tag}
         </span>
-        <h3 className="mt-3 font-sans text-xl sm:text-2xl font-extrabold text-white leading-tight">
+        <h3 className="mt-3 font-sans text-xl sm:text-2xl font-extrabold tracking-tight text-white leading-tight">
           {work.client}
         </h3>
-        <p className="mt-1 font-mono text-xs text-neutral-300">
+        <p className="mt-1 font-sans text-xs text-neutral-300">
           {work.title}
         </p>
       </div>

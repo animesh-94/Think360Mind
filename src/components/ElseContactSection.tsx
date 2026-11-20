@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 
+const SMOOTH_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 interface FormState {
   name: string;
   phone: string;
@@ -105,10 +107,10 @@ export function ElseContactSection() {
   };
 
   const underlineClass = (field: keyof FormState) =>
-    `w-full border-0 border-b bg-transparent px-0 py-2.5 font-mono text-sm text-black placeholder:text-neutral-400 transition-colors focus:outline-hidden ${
+    `w-full border-0 border-b bg-transparent px-0 py-2.5 font-sans text-sm text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-hidden ${
       fieldErrors[field]
         ? 'border-red-600 focus:border-red-600'
-        : 'border-black focus:border-[#4D7C0F]'
+        : 'border-black/80 focus:border-[#4D7C0F]'
     }`;
 
   return (
@@ -119,47 +121,46 @@ export function ElseContactSection() {
     >
       <div className="mx-auto max-w-[1320px] px-6 sm:px-10 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-12 items-start">
-          {/* Left Column: Direct Details & Socials (Exact Else Social Layout with Neon Accent) */}
+          {/* Left Column: Direct Details & Socials */}
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.55, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: SMOOTH_EASE }}
             className="lg:col-span-5 space-y-8 pt-2"
           >
             <div>
               <p
                 id="contact-heading"
-                className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#CCFF00]"
+                className="font-sans text-xs font-bold uppercase tracking-[0.22em] text-[#CCFF00]"
               >
-                CONTACT
+                Contact
               </p>
 
-              <div className="mt-5 space-y-3 text-base sm:text-lg font-bold tracking-tight text-white">
+              <div className="mt-5 space-y-3 font-sans text-base sm:text-lg font-bold tracking-tight text-white">
                 <a
                   href="mailto:hello@think360media.com"
-                  className="block hover:text-[#CCFF00] transition-colors"
+                  className="block hover:text-[#CCFF00] transition-colors duration-300"
                 >
                   hello@think360media.com
                 </a>
                 <a
                   href="tel:+912248903600"
-                  className="block hover:text-[#CCFF00] transition-colors"
+                  className="block hover:text-[#CCFF00] transition-colors duration-300"
                 >
                   +91 (022) 4890 3600
                 </a>
-                <p className="text-neutral-300 font-semibold">
+                <p className="text-neutral-300 font-medium">
                   Mumbai HQ &bull; Bengaluru &bull; New Delhi
                 </p>
               </div>
             </div>
 
-            {/* Minimal Social Row */}
-            <div className="flex items-center gap-5 pt-2">
+            <div className="flex items-center gap-4 pt-2">
               <a
                 href="mailto:hello@think360media.com?subject=Instagram%20Inquiry"
                 aria-label="Instagram"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors duration-300"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className="size-4" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -170,7 +171,7 @@ export function ElseContactSection() {
               <a
                 href="mailto:hello@think360media.com?subject=Meta%20Paid%20Social%20Inquiry"
                 aria-label="Facebook"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors duration-300"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-hidden="true">
                   <path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z" />
@@ -179,7 +180,7 @@ export function ElseContactSection() {
               <a
                 href="mailto:hello@think360media.com?subject=LinkedIn%20Inquiry"
                 aria-label="LinkedIn"
-                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors"
+                className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors duration-300"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="size-4" aria-hidden="true">
                   <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7.5 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-7.8c0-1.86-.03-4.25-2.59-4.25-2.59 0-2.99 2.02-2.99 4.12V23h-4V8z" />
@@ -188,28 +189,30 @@ export function ElseContactSection() {
             </div>
           </motion.div>
 
-          {/* Right Column: Signature Floating White Underline Form Card (Exact Else Social Match) */}
+          {/* Right Column: Floating White Underline Form Card */}
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6, delay: 0.08, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.85, delay: 0.1, ease: SMOOTH_EASE }}
             className="lg:col-span-7"
           >
             <div className="rounded-[2rem] bg-white p-8 sm:p-12 text-black shadow-[0_28px_80px_rgba(0,0,0,0.55)]">
               <div className="mb-8">
-                <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-black">
-                  READY TO COLLABORATE?
+                <p className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-neutral-500">
+                  Ready to collaborate?
                 </p>
-                <p className="mt-3 font-mono text-sm sm:text-base text-neutral-700">
-                  Let&apos;s create something epic together
-                </p>
+                <h3 className="mt-2 font-sans text-2xl sm:text-3xl font-extrabold tracking-[-0.025em] text-black">
+                  Let&apos;s create something{' '}
+                  <span className="font-display-serif italic font-normal">epic</span>{' '}
+                  together.
+                </h3>
               </div>
 
               {status === 'error' && errorMessage && (
                 <div
                   role="alert"
-                  className="mb-6 flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 font-mono text-xs text-red-700"
+                  className="mb-6 flex items-center gap-2.5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 font-sans text-xs font-medium text-red-700"
                 >
                   <AlertCircle className="size-4 shrink-0" aria-hidden="true" />
                   <span>{errorMessage}</span>
@@ -225,21 +228,21 @@ export function ElseContactSection() {
                   <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[#CCFF00] text-black">
                     <CheckCircle2 className="size-7" aria-hidden="true" />
                   </div>
-                  <h3 className="mt-5 font-sans text-2xl font-extrabold uppercase tracking-tight text-black">
+                  <h4 className="mt-5 font-sans text-2xl font-extrabold tracking-tight text-black">
                     Brief Received
-                  </h3>
+                  </h4>
                   {referenceId && (
-                    <p className="mt-1.5 font-mono text-xs font-bold uppercase tracking-widest text-neutral-500">
-                      REF: {referenceId}
+                    <p className="mt-1.5 font-sans text-xs font-bold uppercase tracking-widest text-neutral-500">
+                      Ref: {referenceId}
                     </p>
                   )}
-                  <p className="mt-3 mx-auto max-w-md font-mono text-xs sm:text-sm leading-relaxed text-neutral-600">
+                  <p className="mt-3 mx-auto max-w-md font-sans text-sm leading-relaxed text-neutral-600">
                     Thank you, {formData.name}. Our team will follow up at {formData.email} within one business day.
                   </p>
                   <button
                     type="button"
                     onClick={handleReset}
-                    className="mt-7 inline-flex min-h-[46px] items-center justify-center rounded-full bg-black px-10 py-3 font-sans text-xs font-bold uppercase tracking-[0.18em] text-white transition-all hover:bg-[#CCFF00] hover:text-black"
+                    className="mt-7 inline-flex min-h-[46px] items-center justify-center rounded-full bg-black px-10 py-3 font-sans text-xs font-bold tracking-wide text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black"
                   >
                     Send Another Message
                   </button>
@@ -250,9 +253,9 @@ export function ElseContactSection() {
                     <div>
                       <label
                         htmlFor="contact-name"
-                        className="block font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-black mb-1"
+                        className="block font-sans text-xs font-bold uppercase tracking-wider text-black mb-1"
                       >
-                        NAME *
+                        Name *
                       </label>
                       <input
                         id="contact-name"
@@ -267,7 +270,7 @@ export function ElseContactSection() {
                         className={underlineClass('name')}
                       />
                       {fieldErrors.name && (
-                        <p className="mt-1.5 font-mono text-[11px] text-red-600">
+                        <p className="mt-1.5 font-sans text-xs font-medium text-red-600">
                           {fieldErrors.name}
                         </p>
                       )}
@@ -276,9 +279,9 @@ export function ElseContactSection() {
                     <div>
                       <label
                         htmlFor="contact-phone"
-                        className="block font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-black mb-1"
+                        className="block font-sans text-xs font-bold uppercase tracking-wider text-black mb-1"
                       >
-                        PHONE NUMBER *
+                        Phone Number *
                       </label>
                       <input
                         id="contact-phone"
@@ -293,7 +296,7 @@ export function ElseContactSection() {
                         className={underlineClass('phone')}
                       />
                       {fieldErrors.phone && (
-                        <p className="mt-1.5 font-mono text-[11px] text-red-600">
+                        <p className="mt-1.5 font-sans text-xs font-medium text-red-600">
                           {fieldErrors.phone}
                         </p>
                       )}
@@ -303,9 +306,9 @@ export function ElseContactSection() {
                   <div>
                     <label
                       htmlFor="contact-email"
-                      className="block font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-black mb-1"
+                      className="block font-sans text-xs font-bold uppercase tracking-wider text-black mb-1"
                     >
-                      EMAIL *
+                      Email *
                     </label>
                     <input
                       id="contact-email"
@@ -320,7 +323,7 @@ export function ElseContactSection() {
                       className={underlineClass('email')}
                     />
                     {fieldErrors.email && (
-                      <p className="mt-1.5 font-mono text-[11px] text-red-600">
+                      <p className="mt-1.5 font-sans text-xs font-medium text-red-600">
                         {fieldErrors.email}
                       </p>
                     )}
@@ -329,9 +332,9 @@ export function ElseContactSection() {
                   <div>
                     <label
                       htmlFor="contact-description"
-                      className="block font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-black mb-1"
+                      className="block font-sans text-xs font-bold uppercase tracking-wider text-black mb-1"
                     >
-                      MESSAGE *
+                      Message *
                     </label>
                     <textarea
                       id="contact-description"
@@ -345,7 +348,7 @@ export function ElseContactSection() {
                       className={`resize-y min-h-[84px] ${underlineClass('description')}`}
                     />
                     {fieldErrors.description && (
-                      <p className="mt-1.5 font-mono text-[11px] text-red-600">
+                      <p className="mt-1.5 font-sans text-xs font-medium text-red-600">
                         {fieldErrors.description}
                       </p>
                     )}
@@ -355,15 +358,15 @@ export function ElseContactSection() {
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="inline-flex min-h-[48px] min-w-[200px] items-center justify-center gap-2 rounded-full bg-black px-12 py-3.5 font-sans text-xs font-extrabold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_24px_rgba(204,255,0,0.45)] active:scale-[0.98] disabled:opacity-60"
+                      className="inline-flex min-h-[48px] min-w-[200px] items-center justify-center gap-2 rounded-full bg-black px-12 py-3.5 font-sans text-sm font-bold tracking-tight text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_24px_rgba(204,255,0,0.45)] hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
                     >
                       {status === 'loading' ? (
                         <>
                           <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                          <span>SENDING...</span>
+                          <span>Sending...</span>
                         </>
                       ) : (
-                        <span>SUBMIT</span>
+                        <span>Submit</span>
                       )}
                     </button>
                   </div>
@@ -376,4 +379,3 @@ export function ElseContactSection() {
     </section>
   );
 }
-

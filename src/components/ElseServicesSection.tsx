@@ -3,6 +3,8 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 
+const SMOOTH_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
 interface ServiceCardItem {
   id: string;
   title: string;
@@ -12,12 +14,12 @@ interface ServiceCardItem {
 
 function ChromeIcon({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative mx-auto flex size-16 items-center justify-center transition-transform duration-500 group-hover:-translate-y-1.5 group-hover:scale-110">
+    <div className="relative mx-auto flex size-16 items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:scale-110">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-1 rounded-full bg-[#CCFF00]/0 blur-xl transition-all duration-500 group-hover:bg-[#CCFF00]/35"
+        className="pointer-events-none absolute inset-1 rounded-full bg-[#CCFF00]/0 blur-xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:bg-[#CCFF00]/35"
       />
-      <div className="relative z-10 drop-shadow-[0_10px_20px_rgba(255,255,255,0.12)] group-hover:drop-shadow-[0_0_20px_rgba(204,255,0,0.45)] transition-all duration-500">
+      <div className="relative z-10 drop-shadow-[0_10px_20px_rgba(255,255,255,0.12)] group-hover:drop-shadow-[0_0_20px_rgba(204,255,0,0.45)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
         {children}
       </div>
     </div>
@@ -27,9 +29,9 @@ function ChromeIcon({ children }: { children: React.ReactNode }) {
 const SERVICES: ServiceCardItem[] = [
   {
     id: 'social',
-    title: 'SOCIAL MEDIA MANAGEMENT',
+    title: 'Social Media Management',
     description:
-      'Smart strategies, engaging content and real connections, because social media is more than just likes.',
+      'Smart strategies, engaging content, and real connections — because social media is more than just likes.',
     icon: (
       <svg viewBox="0 0 48 48" className="size-12" aria-hidden="true">
         <defs>
@@ -51,9 +53,9 @@ const SERVICES: ServiceCardItem[] = [
   },
   {
     id: 'content',
-    title: 'CONTENT & FILM CREATION',
+    title: 'Content & Film Creation',
     description:
-      'Words, studio films, 3D CGI and reels that don’t just scroll by — they stop thumbs and start conversations.',
+      'Words, studio films, 3D CGI, and reels that don’t just scroll by — they stop thumbs and start conversations.',
     icon: (
       <svg viewBox="0 0 48 48" className="size-12" aria-hidden="true">
         <defs>
@@ -75,7 +77,7 @@ const SERVICES: ServiceCardItem[] = [
   },
   {
     id: 'brand',
-    title: 'BRAND STRATEGY & DEVELOPMENT',
+    title: 'Brand Strategy & Development',
     description:
       'We don’t just build brands — we give them an unmistakable identity, sharp voice, and category authority.',
     icon: (
@@ -99,7 +101,7 @@ const SERVICES: ServiceCardItem[] = [
   },
   {
     id: 'performance',
-    title: 'PERFORMANCE MARKETING',
+    title: 'Performance Marketing',
     description:
       'Full-funnel Google PMax, Meta Advantage+, and precision media buying engineered for compounding ROAS.',
     icon: (
@@ -123,7 +125,7 @@ const SERVICES: ServiceCardItem[] = [
   },
   {
     id: 'commerce',
-    title: 'WEB & HEADLESS COMMERCE',
+    title: 'Web & Headless Commerce',
     description:
       'Sub-second Next.js and Shopify Plus storefronts paired with automated CRM & WhatsApp retention engines.',
     icon: (
@@ -148,7 +150,7 @@ const SERVICES: ServiceCardItem[] = [
   },
   {
     id: 'seo',
-    title: 'TECHNICAL SEO & AI SEARCH',
+    title: 'Technical SEO & AI Search',
     description:
       'Entity graphs, structured schema, and Generative Engine Optimization so your brand owns search and AI answers.',
     icon: (
@@ -181,6 +183,24 @@ const SERVICES: ServiceCardItem[] = [
 export function ElseServicesSection() {
   const prefersReducedMotion = useReducedMotion();
 
+  const gridVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.09,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: SMOOTH_EASE },
+    },
+  };
+
   return (
     <section
       id="services"
@@ -191,45 +211,51 @@ export function ElseServicesSection() {
         <motion.div
           initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.55, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.8, ease: SMOOTH_EASE }}
           className="text-center"
         >
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.28em] text-[#CCFF00]">
-            SERVICES
+          <p className="font-sans text-xs font-bold uppercase tracking-[0.24em] text-[#CCFF00]">
+            Services
           </p>
           <h2
             id="services-heading"
-            className="mt-4 font-sans text-3xl sm:text-5xl font-extrabold uppercase tracking-[-0.02em] text-white"
+            className="mt-4 font-sans text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white"
           >
-            NOT JUST DIGITAL MARKETERS
+            Not just{' '}
+            <span className="font-display-serif italic font-normal text-[#CCFF00]">
+              digital
+            </span>{' '}
+            marketers.
           </h2>
         </motion.div>
 
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 sm:gap-y-20">
-          {SERVICES.map((service, index) => (
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 sm:gap-y-20"
+        >
+          {SERVICES.map((service) => (
             <motion.div
               key={service.id}
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease: 'easeOut' }}
+              variants={cardVariants}
               className="group flex flex-col items-center text-center px-2"
             >
               <ChromeIcon>{service.icon}</ChromeIcon>
 
-              <h3 className="mt-7 font-sans text-sm sm:text-[15px] font-extrabold uppercase tracking-[0.06em] text-white transition-colors duration-300 group-hover:text-[#CCFF00]">
+              <h3 className="mt-7 font-sans text-base sm:text-lg font-bold tracking-tight text-white transition-colors duration-400 group-hover:text-[#CCFF00]">
                 {service.title}
               </h3>
 
-              <p className="mt-3.5 max-w-[300px] font-mono text-xs sm:text-[13px] leading-[1.8] text-neutral-400">
+              <p className="mt-3 max-w-[310px] font-sans text-sm leading-relaxed text-neutral-400">
                 {service.description}
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
-
