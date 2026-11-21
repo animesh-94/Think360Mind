@@ -205,9 +205,9 @@ export function ElseServicesSection() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="relative lg:sticky lg:top-0 z-30 flex min-h-screen w-full items-center bg-black text-white py-24 sm:py-28 border-t border-white/10 shadow-[0_-28px_70px_rgba(0,0,0,0.92)]"
+      className="relative lg:sticky lg:top-0 z-30 flex lg:min-h-screen w-full items-center bg-black text-white py-16 sm:py-28 border-t border-white/10 shadow-[0_-28px_70px_rgba(0,0,0,0.92)]"
     >
-      <div className="mx-auto max-w-[1280px] px-6 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 lg:px-12 w-full">
         <motion.div
           initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -215,12 +215,12 @@ export function ElseServicesSection() {
           transition={{ duration: 0.8, ease: SMOOTH_EASE }}
           className="text-center"
         >
-          <p className="font-sans text-xs font-bold uppercase tracking-[0.24em] text-[#CCFF00]">
+          <p className="font-sans text-[11px] sm:text-xs font-bold uppercase tracking-[0.24em] text-[#CCFF00]">
             Services
           </p>
           <h2
             id="services-heading"
-            className="mt-4 font-sans text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white"
+            className="mt-3 sm:mt-4 font-sans text-[1.9rem] sm:text-5xl font-extrabold tracking-[-0.03em] leading-[1.1] text-white"
           >
             Not just{' '}
             <span className="font-display-serif italic font-normal text-[#CCFF00]">
@@ -234,22 +234,22 @@ export function ElseServicesSection() {
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 sm:gap-y-20"
+          viewport={{ once: true, amount: 0.1 }}
+          className="mt-10 sm:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-x-12 sm:gap-y-20"
         >
           {SERVICES.map((service) => (
             <motion.div
               key={service.id}
               variants={cardVariants}
-              className="group flex flex-col items-center text-center px-2"
+              className="group flex flex-col items-center text-center rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:rounded-none sm:border-0 sm:bg-transparent sm:p-2"
             >
               <ChromeIcon>{service.icon}</ChromeIcon>
 
-              <h3 className="mt-7 font-sans text-base sm:text-lg font-bold tracking-tight text-white transition-colors duration-400 group-hover:text-[#CCFF00]">
+              <h3 className="mt-5 sm:mt-7 font-sans text-base sm:text-lg font-bold tracking-tight text-white transition-colors duration-400 group-hover:text-[#CCFF00]">
                 {service.title}
               </h3>
 
-              <p className="mt-3 max-w-[310px] font-sans text-sm leading-relaxed text-neutral-400">
+              <p className="mt-2.5 sm:mt-3 max-w-[310px] font-sans text-[13px] sm:text-sm leading-relaxed text-neutral-400">
                 {service.description}
               </p>
             </motion.div>

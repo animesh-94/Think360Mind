@@ -249,16 +249,16 @@ export function ElseHeroStage() {
         </div>
       </div>
 
-      {/* Mobile & Tablet Showcase (< 1024px) */}
+      {/* Mobile & Tablet Showcase (< 1024px): Clean 4:3 Editorial Cards + Swipeable Reel */}
       <div
         id="work-mobile"
-        className="relative z-10 lg:hidden bg-black px-5 py-16 border-t border-white/10"
+        className="relative z-10 lg:hidden bg-black px-4 sm:px-6 py-16 border-t border-white/10 shadow-[0_-24px_60px_rgba(0,0,0,0.9)]"
       >
         <div className="mb-8 text-center">
-          <span className="font-sans text-xs font-bold uppercase tracking-[0.22em] text-[#CCFF00]">
+          <span className="font-sans text-[11px] font-bold uppercase tracking-[0.24em] text-[#CCFF00]">
             Selected Work
           </span>
-          <h2 className="mt-2 font-sans text-3xl font-extrabold tracking-[-0.03em] text-white">
+          <h2 className="mt-2 font-sans text-[1.85rem] sm:text-4xl font-extrabold tracking-[-0.03em] leading-[1.1] text-white">
             Think360Media{' '}
             <span className="font-display-serif italic font-normal text-[#CCFF00]">
               in Motion
@@ -266,15 +266,40 @@ export function ElseHeroStage() {
           </h2>
         </div>
 
-        <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {STAGE_CARDS.map((work) => (
-            <div key={work.id} className="w-[74vw] max-w-[300px] shrink-0 snap-center">
-              <StageReelCard
-                work={work}
-                sizeClass="h-[430px]"
-                onSelect={setSelectedWork}
-              />
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+          {STAGE_CARDS.map((work, idx) => (
+            <motion.button
+              key={work.id}
+              type="button"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.65, delay: idx * 0.08, ease: SMOOTH_EASE }}
+              onClick={() => setSelectedWork(work)}
+              className="group w-full overflow-hidden rounded-2xl border border-white/15 bg-neutral-950 text-left transition-all duration-300 active:scale-[0.99] hover:border-[#CCFF00]"
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-900">
+                <img
+                  src={work.image}
+                  alt={work.client}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white backdrop-blur-md">
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                </span>
+              </div>
+              <div className="p-4">
+                <span className="inline-block font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-[#CCFF00]">
+                  {work.tag}
+                </span>
+                <h3 className="mt-1 font-sans text-lg font-extrabold tracking-tight text-white">
+                  {work.client}
+                </h3>
+                <p className="mt-0.5 font-sans text-xs text-neutral-400">
+                  {work.title}
+                </p>
+              </div>
+            </motion.button>
           ))}
         </div>
       </div>
@@ -291,7 +316,7 @@ export function ElseHeroStage() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="stage-modal-title"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/82 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black/85 p-3 sm:p-4 backdrop-blur-md"
           >
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.96 }}
@@ -299,7 +324,7 @@ export function ElseHeroStage() {
               exit={{ opacity: 0, y: 12, scale: 0.96 }}
               transition={{ duration: 0.35, ease: SMOOTH_EASE }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-2xl overflow-hidden rounded-3xl border border-white/15 bg-[#0A0A0A] text-white shadow-[0_28px_80px_rgba(0,0,0,0.85)]"
+              className="relative w-full max-w-2xl max-h-[90dvh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-white/15 bg-[#0A0A0A] text-white shadow-[0_28px_80px_rgba(0,0,0,0.85)]"
             >
               <button
                 type="button"

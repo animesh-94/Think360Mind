@@ -70,7 +70,10 @@ export function LiquidWordmark() {
     const initGrid = () => {
       const rect = container.getBoundingClientRect();
       width = Math.floor(rect.width || container.clientWidth || 1280);
-      height = Math.floor(Math.max(300, Math.min(440, width * 0.34)));
+      height =
+        width < 640
+          ? Math.floor(Math.max(130, Math.min(180, width * 0.42)))
+          : Math.floor(Math.max(300, Math.min(440, width * 0.34)));
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       canvas.width = width * dpr;
@@ -81,7 +84,7 @@ export function LiquidWordmark() {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
 
-      cellSize = width < 640 ? 9 : 13;
+      cellSize = width < 640 ? 7 : 13;
       cols = Math.ceil(width / cellSize);
       rows = Math.ceil(height / cellSize);
 
@@ -332,11 +335,11 @@ export function LiquidWordmark() {
     <div className="relative w-full">
       <div
         ref={containerRef}
-        className="relative w-full h-[320px] sm:h-[420px] flex items-center justify-center select-none overflow-hidden"
+        className="relative w-full h-[150px] sm:h-[340px] lg:h-[420px] flex items-center justify-center select-none overflow-hidden"
       >
         <Link
-          href="/contact"
-          aria-label="Contact Think360 Media"
+          href="/#contact"
+          aria-label="Contact Think360Media"
           className="block w-full h-full rounded-2xl focus-visible:outline-2 focus-visible:outline-white"
         >
           <canvas ref={canvasRef} aria-hidden="true" className="w-full h-full block" />
@@ -353,18 +356,6 @@ export function LiquidWordmark() {
             <span>Contact Us</span>
             <span>→</span>
           </span>
-        )}
-
-        {isTouchDevice && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
-            <Link
-              href="/contact"
-              className="inline-flex min-h-[44px] items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black text-sm font-bold tracking-wide"
-            >
-              <span>Contact Us</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
         )}
       </div>
     </div>

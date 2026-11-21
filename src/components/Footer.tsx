@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer
       id="footer"
-      className="relative bg-black text-white pt-10 sm:pt-16 pb-10 overflow-hidden"
+      className="relative bg-black text-white pt-6 pb-8 sm:pt-14 sm:pb-10 overflow-hidden"
     >
       <h2 className="sr-only">Think360Media</h2>
 

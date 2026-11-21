@@ -26,23 +26,23 @@ export function ElseClientsBand() {
     <section
       id="clients"
       aria-labelledby="clients-heading"
-      className="relative z-40 w-full bg-white text-black py-20 sm:py-28 overflow-hidden shadow-[0_-24px_60px_rgba(0,0,0,0.45)]"
+      className="relative z-40 w-full bg-white text-black py-14 sm:py-28 overflow-hidden shadow-[0_-24px_60px_rgba(0,0,0,0.45)]"
     >
-      <div className="mx-auto max-w-[1440px] px-6 sm:px-8 text-center">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 text-center">
         <motion.div
           initial={prefersReducedMotion ? false : { opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.8, ease: SMOOTH_EASE }}
         >
-          <p className="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
+          <p className="inline-flex items-center gap-2 font-sans text-[11px] sm:text-xs font-bold uppercase tracking-[0.22em] text-neutral-500">
             <span className="size-2 rounded-full bg-[#CCFF00] ring-1 ring-black/20" aria-hidden="true" />
             <span>Among Our Clients</span>
           </p>
 
           <h2
             id="clients-heading"
-            className="mt-3 font-sans text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] text-black"
+            className="mt-2.5 sm:mt-3 font-sans text-[1.9rem] sm:text-5xl font-extrabold tracking-[-0.03em] text-black"
           >
             Proud to{' '}
             <span className="font-display-serif italic font-normal text-black">
@@ -53,26 +53,26 @@ export function ElseClientsBand() {
       </div>
 
       {/* Smooth Infinite Client Logo Strip */}
-      <div className="relative mt-14 sm:mt-16">
+      <div className="relative mt-9 sm:mt-16">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 sm:w-32 bg-gradient-to-r from-white to-transparent"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 sm:w-32 bg-gradient-to-l from-white to-transparent"
         />
 
-        <Marquee pauseOnHover className="[--duration:34s] [--gap:3.5rem] py-2" repeat={3}>
+        <Marquee pauseOnHover className="[--duration:28s] sm:[--duration:34s] [--gap:1.5rem] sm:[--gap:3.5rem] py-1 sm:py-2" repeat={3}>
           {CLIENT_LOGOS.map((client) => (
             <div
               key={client.name}
-              className="group flex h-16 sm:h-20 w-40 sm:w-48 items-center justify-center px-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105"
+              className="group flex h-12 sm:h-20 w-28 sm:w-48 items-center justify-center px-2 sm:px-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105"
             >
               <img
                 src={client.logo}
                 alt={client.name}
-                className="max-h-10 sm:max-h-12 w-auto object-contain opacity-85 transition-opacity duration-400 group-hover:opacity-100"
+                className="max-h-8 sm:max-h-12 w-auto object-contain opacity-85 transition-opacity duration-400 group-hover:opacity-100"
               />
             </div>
           ))}

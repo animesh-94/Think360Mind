@@ -117,17 +117,17 @@ export function ElseContactSection() {
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="relative z-50 w-full bg-black text-white py-24 sm:py-32 border-t border-white/10"
+      className="relative z-50 w-full bg-black text-white py-16 sm:py-28 lg:py-32 border-t border-white/10"
     >
-      <div className="mx-auto max-w-[1320px] px-6 sm:px-10 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-12 items-start">
+      <div className="mx-auto max-w-[1320px] px-4 sm:px-10 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Left Column: Direct Details & Socials */}
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: SMOOTH_EASE }}
-            className="lg:col-span-5 space-y-8 pt-2"
+            className="lg:col-span-5 space-y-6 sm:space-y-8 pt-1 text-center lg:text-left"
           >
             <div>
               <p
@@ -137,7 +137,7 @@ export function ElseContactSection() {
                 Contact
               </p>
 
-              <div className="mt-5 space-y-3 font-sans text-base sm:text-lg font-bold tracking-tight text-white">
+              <div className="mt-4 sm:mt-5 space-y-2.5 sm:space-y-3 font-sans text-base sm:text-lg font-bold tracking-tight text-white">
                 <a
                   href="mailto:hello@think360media.com"
                   className="block hover:text-[#CCFF00] transition-colors duration-300"
@@ -150,13 +150,13 @@ export function ElseContactSection() {
                 >
                   +91 (022) 4890 3600
                 </a>
-                <p className="text-neutral-300 font-medium">
+                <p className="text-neutral-300 text-sm sm:text-base font-medium">
                   Mumbai HQ &bull; Bengaluru &bull; New Delhi
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center justify-center lg:justify-start gap-4 pt-1">
               <a
                 href="mailto:hello@think360media.com?subject=Instagram%20Inquiry"
                 aria-label="Instagram"
@@ -197,12 +197,12 @@ export function ElseContactSection() {
             transition={{ duration: 0.85, delay: 0.1, ease: SMOOTH_EASE }}
             className="lg:col-span-7"
           >
-            <div className="rounded-[2rem] bg-white p-8 sm:p-12 text-black shadow-[0_28px_80px_rgba(0,0,0,0.55)]">
-              <div className="mb-8">
-                <p className="font-sans text-xs font-bold uppercase tracking-[0.2em] text-neutral-500">
+            <div className="rounded-3xl sm:rounded-[2rem] bg-white p-6 sm:p-12 text-black shadow-[0_28px_80px_rgba(0,0,0,0.55)]">
+              <div className="mb-6 sm:mb-8">
+                <p className="font-sans text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-500">
                   Ready to collaborate?
                 </p>
-                <h3 className="mt-2 font-sans text-2xl sm:text-3xl font-extrabold tracking-[-0.025em] text-black">
+                <h3 className="mt-2 font-sans text-xl sm:text-3xl font-extrabold tracking-[-0.025em] text-black">
                   Let&apos;s create something{' '}
                   <span className="font-display-serif italic font-normal">epic</span>{' '}
                   together.
@@ -358,7 +358,7 @@ export function ElseContactSection() {
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="inline-flex min-h-[48px] min-w-[200px] items-center justify-center gap-2 rounded-full bg-black px-12 py-3.5 font-sans text-sm font-bold tracking-tight text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_24px_rgba(204,255,0,0.45)] hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+                      className="inline-flex min-h-[48px] w-full sm:w-auto sm:min-w-[200px] items-center justify-center gap-2 rounded-full bg-black px-12 py-3.5 font-sans text-sm font-bold tracking-tight text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_24px_rgba(204,255,0,0.45)] hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
                     >
                       {status === 'loading' ? (
                         <>

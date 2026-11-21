@@ -39,13 +39,35 @@ export function Header() {
             }
       }
       transition={{ duration: prefersReducedMotion ? 0.15 : 0.55, ease: SMOOTH_EASE }}
-      className={`fixed top-0 inset-x-0 z-[60] w-full bg-gradient-to-b from-black/90 via-black/60 to-transparent text-white will-change-transform ${
+      className={`fixed top-0 inset-x-0 z-[60] w-full bg-gradient-to-b from-black/95 via-black/70 to-transparent text-white will-change-transform ${
         hidden ? 'pointer-events-none select-none' : 'pointer-events-auto'
       }`}
     >
-      <div className="mx-auto max-w-[940px] px-5 sm:px-8 h-[88px] sm:h-[96px] grid grid-cols-3 items-center">
+      {/* Mobile Header (< 640px): Clean 2-zone zero-collision layout */}
+      <div className="sm:hidden mx-auto w-full px-4 h-[70px] flex items-center justify-between gap-3">
+        <a
+          href="#home"
+          aria-label="Think360Media Home"
+          tabIndex={hidden ? -1 : 0}
+          className="inline-flex min-h-[44px] items-center font-sans text-xl font-black tracking-[-0.04em] text-white whitespace-nowrap"
+        >
+          <span>Think360</span>
+          <span className="text-[#CCFF00]">Media</span>
+        </a>
+
+        <a
+          href="#contact"
+          tabIndex={hidden ? -1 : 0}
+          className="inline-flex min-h-[38px] shrink-0 items-center justify-center rounded-full bg-white px-5 py-2 font-sans text-[11px] font-bold uppercase tracking-[0.14em] text-black transition-all duration-300 active:scale-95 hover:bg-[#CCFF00]"
+        >
+          CONTACT
+        </a>
+      </div>
+
+      {/* Tablet & Desktop Header (>= 640px): Exact Else Social 3-zone centered layout */}
+      <div className="hidden sm:grid mx-auto max-w-[940px] px-8 h-[92px] lg:h-[96px] grid-cols-3 items-center">
         {/* Left Zone: 3 Minimal Social Icons */}
-        <div className="flex items-center justify-start gap-4 sm:gap-6">
+        <div className="flex items-center justify-start gap-6">
           <a
             href="mailto:hello@think360media.com?subject=Instagram%20Inquiry"
             aria-label="Instagram"
@@ -105,7 +127,7 @@ export function Header() {
             href="#home"
             aria-label="Think360Media Home"
             tabIndex={hidden ? -1 : 0}
-            className="group inline-flex min-h-[48px] items-center font-sans text-2xl sm:text-[34px] font-black tracking-[-0.045em] text-white transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] whitespace-nowrap"
+            className="group inline-flex min-h-[48px] items-center font-sans text-[30px] lg:text-[34px] font-black tracking-[-0.045em] text-white transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] whitespace-nowrap"
           >
             <span>Think360</span>
             <span className="text-[#CCFF00]">Media</span>
@@ -117,7 +139,7 @@ export function Header() {
           <a
             href="#contact"
             tabIndex={hidden ? -1 : 0}
-            className="inline-flex min-h-[44px] sm:min-h-[48px] min-w-[116px] sm:min-w-[164px] items-center justify-center rounded-full bg-white px-6 sm:px-9 py-2.5 font-sans text-xs sm:text-[13px] font-bold uppercase tracking-[0.14em] text-black transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_26px_rgba(204,255,0,0.5)] hover:scale-[1.03] active:scale-[0.98]"
+            className="inline-flex min-h-[48px] min-w-[164px] items-center justify-center rounded-full bg-white px-9 py-2.5 font-sans text-[13px] font-bold uppercase tracking-[0.14em] text-black transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_26px_rgba(204,255,0,0.5)] hover:scale-[1.03] active:scale-[0.98]"
           >
             CONTACT
           </a>
