@@ -52,27 +52,43 @@ export function ElseClientsBand() {
         </motion.div>
       </div>
 
-      {/* Smooth Infinite Client Logo Strip */}
-      <div className="relative mt-9 sm:mt-16">
+      {/* Mobile Centered Wrapped Rows (Exact Else Social mob-07 layout) */}
+      <div className="sm:hidden mt-10 px-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-6">
+        {CLIENT_LOGOS.slice(0, 8).map((client) => (
+          <div
+            key={client.name}
+            className="flex h-11 w-[26%] min-w-[84px] items-center justify-center"
+          >
+            <img
+              src={client.logo}
+              alt={client.name}
+              className="max-h-8 w-auto object-contain opacity-90"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Tablet & Desktop Infinite Client Logo Strip */}
+      <div className="hidden sm:block relative mt-16">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 sm:w-32 bg-gradient-to-r from-white to-transparent"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-white to-transparent"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 sm:w-32 bg-gradient-to-l from-white to-transparent"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white to-transparent"
         />
 
-        <Marquee pauseOnHover className="[--duration:28s] sm:[--duration:34s] [--gap:1.5rem] sm:[--gap:3.5rem] py-1 sm:py-2" repeat={3}>
+        <Marquee pauseOnHover className="[--duration:34s] [--gap:3.5rem] py-2" repeat={3}>
           {CLIENT_LOGOS.map((client) => (
             <div
               key={client.name}
-              className="group flex h-12 sm:h-20 w-28 sm:w-48 items-center justify-center px-2 sm:px-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105"
+              className="group flex h-20 w-48 items-center justify-center px-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105"
             >
               <img
                 src={client.logo}
                 alt={client.name}
-                className="max-h-8 sm:max-h-12 w-auto object-contain opacity-85 transition-opacity duration-400 group-hover:opacity-100"
+                className="max-h-12 w-auto object-contain opacity-85 transition-opacity duration-400 group-hover:opacity-100"
               />
             </div>
           ))}

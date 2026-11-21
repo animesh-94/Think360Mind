@@ -41,7 +41,7 @@ export function ElseAboutSection() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative lg:sticky lg:top-0 z-20 flex min-h-[78svh] lg:min-h-screen w-full items-center justify-center overflow-hidden bg-black text-white py-20 sm:py-32 border-t border-white/10 shadow-[0_-28px_70px_rgba(0,0,0,0.9)]"
+      className="relative sticky top-0 z-20 flex min-h-[100svh] w-full items-center justify-center overflow-hidden bg-black text-white py-24 sm:py-32 border-t border-white/10 shadow-[0_-28px_70px_rgba(0,0,0,0.9)]"
     >
       {/* Full-bleed Living Neon Background Snippet */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
@@ -53,7 +53,7 @@ export function ElseAboutSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="relative z-10 mx-auto max-w-5xl px-5 sm:px-8 text-center"
+        className="relative z-10 mx-auto max-w-5xl px-6 sm:px-8 text-center"
       >
         {/* Eyebrow with Expanding Neon Hairlines */}
         <motion.div variants={itemVariants} className="inline-flex items-center gap-3">
@@ -78,7 +78,7 @@ export function ElseAboutSection() {
         <motion.h2
           id="about-heading"
           variants={itemVariants}
-          className="mt-6 sm:mt-7 font-sans text-[2rem] sm:text-5xl lg:text-[58px] font-extrabold tracking-[-0.035em] leading-[1.1] sm:leading-[1.08] text-white"
+          className="mt-6 sm:mt-7 font-sans text-[2.1rem] sm:text-5xl lg:text-[58px] font-extrabold tracking-[-0.035em] leading-[1.08] text-white"
         >
           We craft{' '}
           <span className="font-display-serif italic font-normal text-[#CCFF00]">
@@ -93,7 +93,7 @@ export function ElseAboutSection() {
         {/* Clean Manrope Body Copy */}
         <motion.p
           variants={itemVariants}
-          className="mt-5 sm:mt-7 mx-auto max-w-2xl font-sans text-[15px] sm:text-lg font-normal leading-relaxed text-neutral-300"
+          className="mt-6 sm:mt-7 mx-auto max-w-2xl font-sans text-[15px] sm:text-lg font-normal leading-relaxed text-neutral-300"
         >
           At Think360Media, we&apos;re not just another marketing company &mdash; we&apos;re strategists,
           storytellers, engineers, and filmmakers. Our mission is helping ambitious brands cut
@@ -101,14 +101,14 @@ export function ElseAboutSection() {
           every digital touchpoint.
         </motion.p>
 
-        {/* Smooth CTA Pill */}
-        <motion.div variants={itemVariants} className="mt-8 sm:mt-10">
+        {/* Centered Compact White Pill (Exact Else Social mob-05 proportion) */}
+        <motion.div variants={itemVariants} className="mt-9 sm:mt-10">
           <motion.a
             href="#contact"
             whileHover={prefersReducedMotion ? undefined : { scale: 1.03, y: -2 }}
             whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
             transition={{ duration: 0.35, ease: SMOOTH_EASE }}
-            className="group inline-flex min-h-[48px] sm:min-h-[52px] w-full sm:w-auto items-center justify-center gap-2.5 rounded-full bg-white px-9 py-3.5 font-sans text-sm font-bold tracking-tight text-black transition-colors duration-500 hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_32px_rgba(204,255,0,0.5)]"
+            className="group inline-flex min-h-[50px] sm:min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-white px-10 py-3.5 font-sans text-sm font-bold tracking-tight text-black transition-colors duration-500 hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_32px_rgba(204,255,0,0.5)]"
           >
             <span>Get in Touch</span>
             <ArrowRight
@@ -118,15 +118,15 @@ export function ElseAboutSection() {
           </motion.a>
         </motion.div>
 
-        {/* Subtle Capability Strip */}
+        {/* Subtle Capability Strip (Desktop/Tablet) */}
         <motion.div
           variants={itemVariants}
-          className="mt-10 sm:mt-14 grid grid-cols-1 sm:flex sm:flex-wrap items-center justify-center gap-2.5 sm:gap-x-8 sm:gap-y-3"
+          className="hidden sm:flex mt-14 flex-wrap items-center justify-center gap-x-8 gap-y-3"
         >
           {PILLARS.map((pillar) => (
             <div
               key={pillar.code}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 sm:border-0 sm:bg-transparent sm:p-0 font-sans text-xs font-semibold tracking-wide text-neutral-300"
+              className="inline-flex items-center justify-center gap-2 font-sans text-xs font-semibold tracking-wide text-neutral-300"
             >
               <span className="font-bold text-[#CCFF00]">{pillar.code}</span>
               <span className="text-white/25">/</span>

@@ -107,10 +107,10 @@ export function ElseContactSection() {
   };
 
   const underlineClass = (field: keyof FormState) =>
-    `w-full border-0 border-b bg-transparent px-0 py-2.5 font-sans text-sm text-black placeholder:text-neutral-400 transition-colors duration-300 focus:outline-hidden ${
+    `w-full border-0 border-b bg-transparent px-0 py-2.5 font-sans text-sm text-black placeholder:text-black/55 lg:placeholder:text-neutral-400 transition-colors duration-300 focus:outline-hidden ${
       fieldErrors[field]
-        ? 'border-red-600 focus:border-red-600'
-        : 'border-black/80 focus:border-[#4D7C0F]'
+        ? 'border-red-700 focus:border-red-700'
+        : 'border-black focus:border-black'
     }`;
 
   return (
@@ -120,14 +120,14 @@ export function ElseContactSection() {
       className="relative z-50 w-full bg-black text-white py-16 sm:py-28 lg:py-32 border-t border-white/10"
     >
       <div className="mx-auto max-w-[1320px] px-4 sm:px-10 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Left Column: Direct Details & Socials */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Contact Details: Below Form on Mobile (mob-09), Left Column on Desktop */}
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: SMOOTH_EASE }}
-            className="lg:col-span-5 space-y-6 sm:space-y-8 pt-1 text-center lg:text-left"
+            className="order-2 lg:order-1 lg:col-span-5 space-y-6 sm:space-y-8 pt-1 text-left px-1 lg:px-0"
           >
             <div>
               <p
@@ -156,7 +156,7 @@ export function ElseContactSection() {
               </div>
             </div>
 
-            <div className="flex items-center justify-center lg:justify-start gap-4 pt-1">
+            <div className="flex items-center justify-start gap-4 pt-1">
               <a
                 href="mailto:hello@think360media.com?subject=Instagram%20Inquiry"
                 aria-label="Instagram"
@@ -189,20 +189,20 @@ export function ElseContactSection() {
             </div>
           </motion.div>
 
-          {/* Right Column: Floating White Underline Form Card */}
+          {/* Form Card: Neon Volt Accent Card First on Mobile (Exact Else Social mob-08), Pure White Card on Desktop */}
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.85, delay: 0.1, ease: SMOOTH_EASE }}
-            className="lg:col-span-7"
+            transition={{ duration: 0.85, delay: 0.08, ease: SMOOTH_EASE }}
+            className="order-1 lg:order-2 lg:col-span-7"
           >
-            <div className="rounded-3xl sm:rounded-[2rem] bg-white p-6 sm:p-12 text-black shadow-[0_28px_80px_rgba(0,0,0,0.55)]">
-              <div className="mb-6 sm:mb-8">
-                <p className="font-sans text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-500">
+            <div className="rounded-3xl sm:rounded-[2rem] bg-[#CCFF00] lg:bg-white p-6 sm:p-10 lg:p-12 text-black shadow-[0_28px_80px_rgba(0,0,0,0.55)]">
+              <div className="mb-7 sm:mb-8">
+                <p className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-black/80 lg:text-neutral-500">
                   Ready to collaborate?
                 </p>
-                <h3 className="mt-2 font-sans text-xl sm:text-3xl font-extrabold tracking-[-0.025em] text-black">
+                <h3 className="mt-2 font-sans text-2xl sm:text-3xl font-extrabold tracking-[-0.025em] text-black">
                   Let&apos;s create something{' '}
                   <span className="font-display-serif italic font-normal">epic</span>{' '}
                   together.
@@ -358,7 +358,7 @@ export function ElseContactSection() {
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="inline-flex min-h-[48px] w-full sm:w-auto sm:min-w-[200px] items-center justify-center gap-2 rounded-full bg-black px-12 py-3.5 font-sans text-sm font-bold tracking-tight text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black hover:shadow-[0_0_24px_rgba(204,255,0,0.45)] hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
+                      className="inline-flex min-h-[50px] w-full lg:w-auto lg:min-w-[200px] items-center justify-center gap-2 rounded-full bg-white text-black lg:bg-black lg:text-white px-12 py-3.5 font-sans text-sm font-bold uppercase tracking-[0.12em] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-black hover:text-[#CCFF00] lg:hover:bg-[#CCFF00] lg:hover:text-black hover:shadow-[0_0_24px_rgba(204,255,0,0.45)] hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60"
                     >
                       {status === 'loading' ? (
                         <>

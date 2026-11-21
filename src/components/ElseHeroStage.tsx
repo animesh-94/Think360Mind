@@ -123,31 +123,34 @@ export function ElseHeroStage() {
     offset: ['start start', 'end end'],
   });
 
-  // Silky high-inertia luxury spring smoothing for scroll-driven transitions
+  // Silky high-inertia luxury spring smoothing for BOTH mobile & desktop scroll choreography
   const smooth = useSpring(scrollYProgress, {
     stiffness: 65,
     damping: 24,
     mass: 0.6,
   });
 
-  // 1) Center card rises first directly over pinned Hero, holds, then glides smoothly out
+  // Desktop 3-column staggered rise + exit
   const centerY = useTransform(smooth, [0.02, 0.28, 0.72, 0.98], ['105vh', '0vh', '0vh', '-115vh']);
   const centerScale = useTransform(smooth, [0.02, 0.28, 0.72, 0.98], [0.92, 1, 1, 0.95]);
   const centerOpacity = useTransform(smooth, [0.01, 0.12, 0.88, 0.99], [0, 1, 1, 0]);
 
-  // 2) Left card rises second (slightly higher), holds, then glides out
   const leftY = useTransform(smooth, [0.14, 0.4, 0.72, 0.98], ['115vh', '-3vh', '-3vh', '-118vh']);
   const leftScale = useTransform(smooth, [0.14, 0.4, 0.72, 0.98], [0.92, 1, 1, 0.95]);
   const leftOpacity = useTransform(smooth, [0.12, 0.24, 0.88, 0.99], [0, 1, 1, 0]);
 
-  // 3) Right card rises third (slightly lower), holds, then glides out
   const rightY = useTransform(smooth, [0.24, 0.5, 0.72, 0.98], ['120vh', '4vh', '4vh', '-112vh']);
   const rightScale = useTransform(smooth, [0.24, 0.5, 0.72, 0.98], [0.92, 1, 1, 0.95]);
   const rightOpacity = useTransform(smooth, [0.22, 0.34, 0.88, 0.99], [0, 1, 1, 0]);
 
-  // 4) Giant monumental "THINK360MEDIA" letters sweep smoothly IN FRONT OF the 3 pinned cards
-  const wordY = useTransform(smooth, [0.36, 0.56, 0.82], ['80vh', '0vh', '-90vh']);
-  const wordOpacity = useTransform(smooth, [0.35, 0.48, 0.68, 0.82], [0, 0.96, 0.96, 0]);
+  // Monumental "THINK360MEDIA" sweeping smoothly IN FRONT OF cards on both desktop & mobile
+  const wordY = useTransform(smooth, [0.36, 0.58, 0.84], ['78vh', '0vh', '-88vh']);
+  const wordOpacity = useTransform(smooth, [0.34, 0.48, 0.7, 0.84], [0, 0.98, 0.98, 0]);
+
+  // Mobile overlapping 3-card collage timings matching elsesocial.com mob-02 -> mob-04 identically
+  const mobCenterY = useTransform(smooth, [0.02, 0.28, 0.74, 0.98], ['100svh', '-4svh', '-4svh', '-110svh']);
+  const mobLeftY = useTransform(smooth, [0.14, 0.42, 0.74, 0.98], ['115svh', '18svh', '18svh', '-105svh']);
+  const mobRightY = useTransform(smooth, [0.24, 0.52, 0.74, 0.98], ['115svh', '-2svh', '-2svh', '-108svh']);
 
   useEffect(() => {
     if (!selectedWork) return;
@@ -160,20 +163,76 @@ export function ElseHeroStage() {
 
   return (
     <div ref={trackRef} className="relative w-full bg-black">
-      {/* Sticky Pinned Hero Layer */}
-      <div className="sticky top-0 z-0 min-h-screen w-full flex items-center bg-black">
+      {/* Sticky Pinned Hero Layer (mobile + desktop): stays pinned behind rising cards */}
+      <div className="sticky top-0 z-0 min-h-[100svh] w-full flex items-center bg-black">
         <Hero />
       </div>
 
-      {/* Desktop Rising Vertical Showcase Overlay Track */}
+      {/* Unified Rising Overlay Track (Mobile overlapping collage + Desktop 3-column staggered stage) */}
       <div
         aria-label="Featured Work Showcase"
-        className="relative z-10 hidden lg:block h-[330vh] -mt-[100vh] pointer-events-none"
+        className="relative z-10 h-[280svh] lg:h-[330vh] -mt-[100svh] lg:-mt-[100vh] pointer-events-none"
       >
         <span id="work" className="absolute top-[24%] left-0 pointer-events-none" aria-hidden="true" />
-        <div className="sticky top-0 h-screen w-full overflow-clip flex items-center justify-center px-8">
-          {/* 3 Staggered Rising Cards (z-20) */}
-          <div className="relative z-20 mx-auto w-full max-w-[1080px] grid grid-cols-12 items-center gap-8 xl:gap-10 pointer-events-auto">
+
+        <div className="sticky top-0 h-[100svh] lg:h-screen w-full overflow-clip flex items-center justify-center px-4 lg:px-8">
+          {/* MOBILE OVERLAPPING 3-CARD COLLAGE (< 1024px) — Exact Else Social mob-02 -> mob-04 choreography */}
+          <div className="relative z-20 lg:hidden w-full max-w-[430px] h-full flex items-center justify-center pointer-events-auto">
+            {/* Center Dominant Card rises first */}
+            <motion.div
+              style={{
+                y: prefersReducedMotion ? 0 : mobCenterY,
+                scale: prefersReducedMotion ? 1 : centerScale,
+                opacity: prefersReducedMotion ? 1 : centerOpacity,
+              }}
+              className="absolute w-[64%] max-w-[265px] z-10 will-change-transform"
+            >
+              <StageReelCard
+                work={STAGE_CARDS[1]}
+                sizeClass="h-[52svh] max-h-[450px]"
+                featured
+                compact
+                onSelect={setSelectedWork}
+              />
+            </motion.div>
+
+            {/* Lower-Left Overlapping Card rises second */}
+            <motion.div
+              style={{
+                y: prefersReducedMotion ? 0 : mobLeftY,
+                scale: prefersReducedMotion ? 1 : leftScale,
+                opacity: prefersReducedMotion ? 1 : leftOpacity,
+              }}
+              className="absolute left-0 w-[46%] max-w-[190px] z-20 will-change-transform"
+            >
+              <StageReelCard
+                work={STAGE_CARDS[0]}
+                sizeClass="h-[36svh] max-h-[310px]"
+                compact
+                onSelect={setSelectedWork}
+              />
+            </motion.div>
+
+            {/* Mid-Right Overlapping Card rises third */}
+            <motion.div
+              style={{
+                y: prefersReducedMotion ? 0 : mobRightY,
+                scale: prefersReducedMotion ? 1 : rightScale,
+                opacity: prefersReducedMotion ? 1 : rightOpacity,
+              }}
+              className="absolute right-0 w-[44%] max-w-[184px] z-20 will-change-transform"
+            >
+              <StageReelCard
+                work={STAGE_CARDS[2]}
+                sizeClass="h-[33svh] max-h-[290px]"
+                compact
+                onSelect={setSelectedWork}
+              />
+            </motion.div>
+          </div>
+
+          {/* DESKTOP 3-COLUMN STAGGERED CARDS (>= 1024px) */}
+          <div className="relative z-20 hidden lg:grid mx-auto w-full max-w-[1080px] grid-cols-12 items-center gap-8 xl:gap-10 pointer-events-auto">
             <motion.div
               style={{
                 y: prefersReducedMotion ? 0 : leftY,
@@ -221,7 +280,7 @@ export function ElseHeroStage() {
             </motion.div>
           </div>
 
-          {/* Giant Monumental Letters Sweeping Up IN FRONT OF the 3 Pinned Cards (z-30) */}
+          {/* Giant Monumental Letters Sweeping Up IN FRONT OF the 3 Pinned Cards (z-30) on both mobile & desktop */}
           <motion.div
             aria-hidden="true"
             style={{
@@ -230,7 +289,7 @@ export function ElseHeroStage() {
             }}
             className="pointer-events-none select-none will-change-transform absolute inset-0 z-30 flex items-center justify-center"
           >
-            <div className="w-full max-w-[1440px] px-6 flex items-center justify-between font-sans font-black uppercase text-[clamp(3.25rem,8.8vw,8.75rem)] leading-none tracking-[-0.03em] text-white drop-shadow-[0_14px_40px_rgba(0,0,0,0.85)]">
+            <div className="w-full max-w-[1440px] px-4 sm:px-6 flex items-center justify-between font-sans font-black uppercase text-[clamp(2rem,9.2vw,8.75rem)] leading-none tracking-[-0.03em] text-white drop-shadow-[0_12px_36px_rgba(0,0,0,0.9)]">
               <span>T</span>
               <span>H</span>
               <span>I</span>
@@ -246,61 +305,6 @@ export function ElseHeroStage() {
               <span>A</span>
             </div>
           </motion.div>
-        </div>
-      </div>
-
-      {/* Mobile & Tablet Showcase (< 1024px): Clean 4:3 Editorial Cards + Swipeable Reel */}
-      <div
-        id="work-mobile"
-        className="relative z-10 lg:hidden bg-black px-4 sm:px-6 py-16 border-t border-white/10 shadow-[0_-24px_60px_rgba(0,0,0,0.9)]"
-      >
-        <div className="mb-8 text-center">
-          <span className="font-sans text-[11px] font-bold uppercase tracking-[0.24em] text-[#CCFF00]">
-            Selected Work
-          </span>
-          <h2 className="mt-2 font-sans text-[1.85rem] sm:text-4xl font-extrabold tracking-[-0.03em] leading-[1.1] text-white">
-            Think360Media{' '}
-            <span className="font-display-serif italic font-normal text-[#CCFF00]">
-              in Motion
-            </span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
-          {STAGE_CARDS.map((work, idx) => (
-            <motion.button
-              key={work.id}
-              type="button"
-              initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.65, delay: idx * 0.08, ease: SMOOTH_EASE }}
-              onClick={() => setSelectedWork(work)}
-              className="group w-full overflow-hidden rounded-2xl border border-white/15 bg-neutral-950 text-left transition-all duration-300 active:scale-[0.99] hover:border-[#CCFF00]"
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-900">
-                <img
-                  src={work.image}
-                  alt={work.client}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <span className="absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white backdrop-blur-md">
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </span>
-              </div>
-              <div className="p-4">
-                <span className="inline-block font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-[#CCFF00]">
-                  {work.tag}
-                </span>
-                <h3 className="mt-1 font-sans text-lg font-extrabold tracking-tight text-white">
-                  {work.client}
-                </h3>
-                <p className="mt-0.5 font-sans text-xs text-neutral-400">
-                  {work.title}
-                </p>
-              </div>
-            </motion.button>
-          ))}
         </div>
       </div>
 
@@ -330,7 +334,7 @@ export function ElseHeroStage() {
                 type="button"
                 onClick={() => setSelectedWork(null)}
                 aria-label="Close case study details"
-                className="absolute top-4 right-4 z-10 inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-black/80 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors duration-300"
+                className="absolute top-3.5 right-3.5 z-10 inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-black/80 text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-colors duration-300"
               >
                 <X className="size-4" />
               </button>
@@ -343,7 +347,7 @@ export function ElseHeroStage() {
                 />
               </div>
 
-              <div className="p-6 sm:p-8 space-y-5">
+              <div className="p-5 sm:p-8 space-y-5">
                 <div className="flex flex-wrap gap-1.5">
                   {ALL_WORKS.map((item) => {
                     const active = item.id === selectedWork.id;
@@ -352,7 +356,7 @@ export function ElseHeroStage() {
                         key={item.id}
                         type="button"
                         onClick={() => setSelectedWork(item)}
-                        className={`rounded-full px-3.5 py-1 font-sans text-xs font-semibold transition-colors duration-300 ${
+                        className={`rounded-full px-3 py-1 font-sans text-xs font-semibold transition-colors duration-300 ${
                           active
                             ? 'bg-[#CCFF00] text-black'
                             : 'border border-white/15 bg-white/5 text-neutral-300 hover:border-white/40 hover:text-white'
@@ -368,7 +372,7 @@ export function ElseHeroStage() {
                   <span className="font-sans text-xs font-bold uppercase tracking-[0.18em] text-[#CCFF00]">
                     {selectedWork.tag}
                   </span>
-                  <h3 id="stage-modal-title" className="mt-1.5 font-sans text-2xl font-extrabold tracking-tight text-white">
+                  <h3 id="stage-modal-title" className="mt-1.5 font-sans text-xl sm:text-2xl font-extrabold tracking-tight text-white">
                     {selectedWork.client} &mdash; {selectedWork.title}
                   </h3>
                 </div>
@@ -430,11 +434,13 @@ function StageReelCard({
   work,
   sizeClass,
   featured = false,
+  compact = false,
   onSelect,
 }: {
   work: ShowcaseWork;
   sizeClass: string;
   featured?: boolean;
+  compact?: boolean;
   onSelect: (work: ShowcaseWork) => void;
 }) {
   return (
@@ -443,8 +449,8 @@ function StageReelCard({
       onClick={() => onSelect(work)}
       className={`group relative w-full ${sizeClass} overflow-hidden rounded-[10px] border ${
         featured
-          ? 'border-[#CCFF00]/50 shadow-[0_36px_95px_rgba(0,0,0,0.92)]'
-          : 'border-white/20 shadow-[0_28px_80px_rgba(0,0,0,0.85)]'
+          ? 'border-[#CCFF00]/50 shadow-[0_28px_80px_rgba(0,0,0,0.92)]'
+          : 'border-white/20 shadow-[0_22px_64px_rgba(0,0,0,0.88)]'
       } bg-neutral-950 text-left transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[#CCFF00] hover:shadow-[0_0_40px_rgba(204,255,0,0.28)]`}
     >
       <img
@@ -453,17 +459,27 @@ function StageReelCard({
         className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/92 via-black/25 to-transparent" />
-      <div className="absolute top-4 right-4 inline-flex size-10 items-center justify-center rounded-full border border-white/25 bg-black/70 text-white backdrop-blur-md transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-[#CCFF00] group-hover:bg-[#CCFF00] group-hover:text-black">
-        <ArrowUpRight className="size-4" aria-hidden="true" />
+      <div
+        className={`absolute ${
+          compact ? 'top-2.5 right-2.5 size-7' : 'top-4 right-4 size-10'
+        } inline-flex items-center justify-center rounded-full border border-white/25 bg-black/70 text-white backdrop-blur-md transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:border-[#CCFF00] group-hover:bg-[#CCFF00] group-hover:text-black`}
+      >
+        <ArrowUpRight className={compact ? 'size-3.5' : 'size-4'} aria-hidden="true" />
       </div>
-      <div className="absolute inset-x-0 bottom-0 p-5">
-        <span className="inline-block rounded-full border border-[#CCFF00]/45 bg-black/75 px-3 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-[#CCFF00] backdrop-blur-sm">
-          {work.tag}
-        </span>
-        <h3 className="mt-3 font-sans text-xl sm:text-2xl font-extrabold tracking-tight text-white leading-tight">
+      <div className={`absolute inset-x-0 bottom-0 ${compact ? 'p-3' : 'p-5'}`}>
+        {!compact && (
+          <span className="inline-block rounded-full border border-[#CCFF00]/45 bg-black/75 px-3 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-[#CCFF00] backdrop-blur-sm">
+            {work.tag}
+          </span>
+        )}
+        <h3
+          className={`${
+            compact ? 'text-sm font-extrabold' : 'mt-3 text-xl sm:text-2xl font-extrabold'
+          } font-sans tracking-tight text-white leading-tight`}
+        >
           {work.client}
         </h3>
-        <p className="mt-1 font-sans text-xs text-neutral-300">
+        <p className={`mt-0.5 font-sans text-neutral-300 line-clamp-1 ${compact ? 'text-[10px]' : 'text-xs'}`}>
           {work.title}
         </p>
       </div>
