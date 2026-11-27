@@ -66,18 +66,18 @@ export function Header() {
       <div className="sm:hidden mx-auto w-full px-4 h-[74px] flex items-center justify-between gap-2">
         <a
           href="#home"
-          aria-label="Think360Media Home"
+          aria-label="Think360 Media Home"
           tabIndex={hidden ? -1 : 0}
           className="inline-flex flex-col leading-none py-1"
         >
-          <span className="font-sans text-[21px] font-black tracking-[-0.04em] text-white whitespace-nowrap">
-            Think360<span className="text-[#CCFF00]">Media</span>
+          <span className="font-sans text-[20px] font-black tracking-[-0.04em] text-white whitespace-nowrap">
+            Think360 <span className="text-[#CCFF00]">Media</span>
           </span>
         </a>
 
         <div className="flex items-center gap-3">
           <a
-            href="mailto:hello@think360media.com?subject=Instagram%20Inquiry"
+            href="#contact"
             aria-label="Instagram"
             tabIndex={hidden ? -1 : 0}
             className="inline-flex size-8 items-center justify-center text-white hover:text-[#CCFF00] transition-colors"
@@ -89,7 +89,7 @@ export function Header() {
             </svg>
           </a>
           <a
-            href="mailto:hello@think360media.com?subject=Meta%20Paid%20Social%20Inquiry"
+            href="#contact"
             aria-label="Facebook"
             tabIndex={hidden ? -1 : 0}
             className="inline-flex size-8 items-center justify-center text-white hover:text-[#CCFF00] transition-colors"
@@ -99,7 +99,7 @@ export function Header() {
             </svg>
           </a>
           <a
-            href="mailto:hello@think360media.com?subject=LinkedIn%20Inquiry"
+            href="#contact"
             aria-label="LinkedIn"
             tabIndex={hidden ? -1 : 0}
             className="inline-flex size-8 items-center justify-center text-white hover:text-[#CCFF00] transition-colors"
@@ -153,7 +153,7 @@ export function Header() {
         {/* Left Zone: 3 Minimal Social Icons */}
         <div className="flex items-center justify-start gap-6">
           <a
-            href="mailto:hello@think360media.com?subject=Instagram%20Inquiry"
+            href="#contact"
             aria-label="Instagram"
             tabIndex={hidden ? -1 : 0}
             className="inline-flex size-9 items-center justify-center rounded-full text-white hover:text-[#CCFF00] transition-colors duration-300"
@@ -165,7 +165,7 @@ export function Header() {
             </svg>
           </a>
           <a
-            href="mailto:hello@think360media.com?subject=Meta%20Paid%20Social%20Inquiry"
+            href="#contact"
             aria-label="Facebook"
             tabIndex={hidden ? -1 : 0}
             className="inline-flex size-9 items-center justify-center rounded-full text-white hover:text-[#CCFF00] transition-colors duration-300"
@@ -175,7 +175,7 @@ export function Header() {
             </svg>
           </a>
           <a
-            href="mailto:hello@think360media.com?subject=LinkedIn%20Inquiry"
+            href="#contact"
             aria-label="LinkedIn"
             tabIndex={hidden ? -1 : 0}
             className="inline-flex size-9 items-center justify-center rounded-full text-white hover:text-[#CCFF00] transition-colors duration-300"
@@ -186,15 +186,15 @@ export function Header() {
           </a>
         </div>
 
-        {/* Center Zone: Larger Prominent Think360Media Wordmark */}
+        {/* Center Zone: Larger Prominent Think360 Media Wordmark */}
         <div className="flex justify-center">
           <a
             href="#home"
-            aria-label="Think360Media Home"
+            aria-label="Think360 Media Home"
             tabIndex={hidden ? -1 : 0}
             className="group inline-flex min-h-[48px] items-center font-sans text-[30px] lg:text-[34px] font-black tracking-[-0.045em] text-white transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] whitespace-nowrap"
           >
-            <span>Think360</span>
+            <span>Think360&nbsp;</span>
             <span className="text-[#CCFF00]">Media</span>
           </a>
         </div>

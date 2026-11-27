@@ -7,14 +7,12 @@ export function Footer() {
   return (
     <footer
       id="footer"
-      className="relative bg-black text-white pt-6 pb-8 sm:pt-14 sm:pb-10 overflow-hidden"
+      className="relative flex min-h-[60svh] md:min-h-[100dvh] w-full items-center justify-center bg-black text-white px-4 sm:px-8 lg:px-14 py-12 overflow-hidden"
     >
-      <h2 className="sr-only">Think360Media</h2>
+      <h2 className="sr-only">Think360</h2>
 
-      <div className="mx-auto max-w-[1600px] px-4 sm:px-8 lg:px-14 relative z-10">
-        <div className="my-2 sm:my-4">
-          <LiquidWordmark />
-        </div>
+      <div className="mx-auto w-full max-w-[1600px] relative z-10">
+        <LiquidWordmark />
       </div>
     </footer>
   );

@@ -40,7 +40,6 @@
   }
 
   html {
-    scroll-behavior: smooth;
     background-color: #000000;
     color: var(--text-primary);
     font-family: var(--font-sans);
@@ -202,6 +201,32 @@
   animation: spin-around calc(var(--speed, 3s) * 2) infinite linear;
 }
 
+@property --vui-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes vui-border-spin {
+  to {
+    --vui-angle: 360deg;
+  }
+}
+
+.vui-neon-border {
+  background: conic-gradient(
+    from var(--vui-angle),
+    rgba(255, 255, 255, 0.14) 0deg,
+    rgba(255, 255, 255, 0.45) 55deg,
+    #CCFF00 105deg,
+    rgba(255, 255, 255, 0.12) 155deg,
+    rgba(255, 255, 255, 0.08) 250deg,
+    #CCFF00 315deg,
+    rgba(255, 255, 255, 0.14) 360deg
+  );
+  animation: vui-border-spin var(--vui-duration, 5.5s) linear infinite;
+}
+
 .motion-paused,
 .motion-paused * {
   animation-play-state: paused !important;
@@ -214,7 +239,8 @@
   .animate-orbit,
   .animate-spotlight,
   .animate-shimmer-slide,
-  .animate-spin-around {
+  .animate-spin-around,
+  .vui-neon-border {
     animation: none !important;
   }
 }

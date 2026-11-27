@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "vengeanceui": {
+      "command": "npx",
+      "args": ["-y", "vengeanceui"]
+    },
+    "vgpu": {
+      "command": "npx",
+      "args": ["vgpu", "mcp", "--project-from-cwd"]
+    }
+  }
+}

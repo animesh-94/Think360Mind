@@ -4,6 +4,7 @@ import { ElseHeroStage } from '@/components/ElseHeroStage';
 import { ElseAboutSection } from '@/components/ElseAboutSection';
 import { ElseServicesSection } from '@/components/ElseServicesSection';
 import { ElseClientsBand } from '@/components/ElseClientsBand';
+import { ElseStatsCtaBand } from '@/components/ElseStatsCtaBand';
 import { ElseContactSection } from '@/components/ElseContactSection';
 import { Footer } from '@/components/Footer';
 
@@ -18,6 +19,7 @@ export default function HomePage() {
           <ElseAboutSection />
           <ElseServicesSection />
           <ElseClientsBand />
+          <ElseStatsCtaBand />
           <ElseContactSection />
         </main>
       </div>

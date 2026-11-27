@@ -1,86 +1,110 @@
 'use client';
 
 import React from 'react';
-import { DitherShader } from './ui/dither-shader';
+import { motion, useReducedMotion } from 'motion/react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { FftOceanBackground } from './fft-ocean';
+
+const SMOOTH_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export function Hero() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const reveal = (delay: number) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, delay, ease: SMOOTH_EASE },
+        };
+
   return (
     <section
       id="home"
       aria-labelledby="hero-heading"
-      className="relative w-full bg-black text-white overflow-hidden"
+      className="relative w-full min-h-[100svh] bg-black text-white overflow-hidden flex flex-col justify-between"
     >
-      {/* Full-bleed edge-to-edge @aceternity/dither-shader background */}
-      <div className="relative min-h-[100svh] sm:min-h-[88vh] w-full flex items-center pt-24 pb-16 sm:py-32">
-        <div className="absolute inset-0 z-0">
-          <DitherShader
-            gridSize={3}
-            speed={0.6}
-            ditherMode="bayer"
-            primaryColor={[0.96, 0.96, 0.98]}
-            backgroundColor={[0.02, 0.02, 0.03]}
-            interactive={true}
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.56)_58%,transparent_92%)] sm:bg-[radial-gradient(circle_at_25%_50%,rgba(0,0,0,0.86)_0%,rgba(0,0,0,0.52)_52%,transparent_88%)]"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_55%,rgba(204,255,0,0.11)_0%,transparent_58%)]"
-          />
-        </div>
-
-        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12 text-center">
-          <div className="max-w-4xl mx-auto flex flex-col items-center">
-            {/* Fluid Display Headline with Typographic Rhythm */}
-            <h1
-              id="hero-heading"
-              className="font-sans text-[clamp(2.25rem,9vw,5.75rem)] font-extrabold tracking-[-0.04em] leading-[1.06] text-white"
-            >
-              <span className="bg-gradient-to-b from-white via-neutral-100 to-neutral-300 bg-clip-text text-transparent">
-                Transform Your
-              </span>{' '}
-              <span className="font-display-serif italic font-normal text-[#CCFF00]">
-                Marketing
-              </span>{' '}
-              <br className="hidden sm:inline" />
-              <span className="text-white">with Think360Media</span>
-            </h1>
-
-            {/* Editorial Subheadline */}
-            <p className="mt-5 sm:mt-6 text-[15px] sm:text-xl text-neutral-300 font-normal leading-relaxed max-w-xl sm:max-w-2xl text-center">
-              Automate Campaigns, Engage Audiences, and Boost Lead Generation with Our All-in-One Marketing Solution
-            </p>
-
-            {/* Quiet Scroll Affordance */}
-            <a
-              href="#work"
-              aria-label="Scroll to explore Think360Media"
-              className="group mt-10 sm:mt-12 inline-flex min-h-[44px] flex-col items-center justify-center gap-2 rounded-full px-4 py-2 text-[11px] font-medium uppercase tracking-[0.22em] text-neutral-400 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CCFF00]"
-            >
-              <span>Scroll to explore</span>
-              <span className="flex flex-col items-center">
-                <span className="h-5 w-px bg-gradient-to-b from-[#CCFF00] to-transparent transition-all duration-300 group-hover:h-7" />
-                <svg
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-[#CCFF00] transition-transform duration-300 group-hover:translate-y-0.5 motion-safe:animate-bounce"
-                >
-                  <path
-                    d="M4 6l4 4 4-4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
+      {/* Vercel vgpu "Particles ocean" (fft-ocean) WebGPU background with subtle Neon Volt crest glint */}
+      <div className="absolute inset-0 z-0">
+        <FftOceanBackground />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_62%_48%_at_50%_42%,rgba(0,0,0,0.62)_0%,rgba(0,0,0,0.22)_64%,rgba(0,0,0,0.68)_100%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black via-black/65 to-transparent"
+        />
       </div>
+
+      {/* Centered Editorial Hero Typography (Pure Black & White, Restrained Neon Hover Only) */}
+      <div className="relative z-10 mx-auto w-full max-w-[1320px] flex-1 flex flex-col items-center justify-center px-5 sm:px-8 lg:px-12 pt-28 sm:pt-32 pb-12 text-center">
+        <motion.h1
+          id="hero-heading"
+          {...reveal(0.08)}
+          className="max-w-5xl font-sans text-[clamp(2.65rem,8.4vw,6.35rem)] font-extrabold tracking-[-0.045em] leading-[1.01] text-white"
+        >
+          <span className="block text-white">Building Brands</span>
+          <span className="mt-1 block">
+            <span className="text-white">From Every </span>
+            <span className="font-display-serif italic font-normal text-white">
+              Angle.
+            </span>
+          </span>
+        </motion.h1>
+
+        <motion.p
+          {...reveal(0.18)}
+          className="mt-6 sm:mt-7 max-w-xl sm:max-w-2xl font-sans text-[15px] sm:text-lg lg:text-[19px] font-normal leading-relaxed text-neutral-300"
+        >
+          Think360 Media is your 360° Growth Partner: uniting branding, creativity, media,
+          performance, and communication under one shared vision.
+        </motion.p>
+
+        {/* Crisp Monochrome Action Row (Neon Volt reserved strictly for tactile hover feedback) */}
+        <motion.div
+          {...reveal(0.28)}
+          className="mt-9 sm:mt-11 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto"
+        >
+          <a
+            href="#contact"
+            className="group inline-flex min-h-[50px] w-full sm:w-auto items-center justify-center gap-2.5 rounded-full bg-white px-8 py-3 font-sans text-[13px] font-extrabold uppercase tracking-[0.12em] text-black transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[#CCFF00] hover:text-black active:scale-[0.98]"
+          >
+            <span>Let&apos;s Build What&apos;s Next</span>
+            <ArrowUpRight
+              className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            />
+          </a>
+
+          <a
+            href="#work"
+            className="group inline-flex min-h-[50px] w-full sm:w-auto items-center justify-center gap-2.5 rounded-full border border-white/25 bg-black/45 px-7 py-3 font-sans text-[13px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-white hover:bg-white/10"
+          >
+            <span>Selected Work</span>
+            <ArrowDown
+              className="size-4 text-neutral-300 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-white"
+              aria-hidden="true"
+            />
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Minimal Scroll Cue */}
+      <motion.div
+        {...reveal(0.38)}
+        className="relative z-10 mx-auto w-full max-w-[1320px] px-5 sm:px-8 pb-7 flex items-center justify-center"
+      >
+        <a
+          href="#work"
+          aria-label="Scroll to selected work"
+          className="group inline-flex min-h-[44px] flex-col items-center justify-center gap-1.5 px-4 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-neutral-400 transition-colors hover:text-white"
+        >
+          <span>Scroll</span>
+          <span className="h-5 w-px bg-gradient-to-b from-white/70 to-transparent transition-all duration-300 group-hover:h-7 group-hover:from-[#CCFF00]" />
+        </a>
+      </motion.div>
     </section>
   );
 }
